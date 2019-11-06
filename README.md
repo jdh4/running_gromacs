@@ -56,11 +56,17 @@ cd gromacs-5.1.4
 mkdir build
 cd build
 
+module purge
 module load fftw/gcc/3.3.8
 
 cmake .. -DGMX_FFT_LIBRARY=fftw3 -DGMX_BUILD_OWN_FFTW=OFF -DCMAKE_INCLUDE_PATH=/usr/local/fftw/gcc/3.3.8/include -DCMAKE_LIBRARY_PATH=/usr/local/fftw/gcc/3.3.8/lib64 -DGMX_MPI=OFF -DGMX_GPU=OFF -DGMX_DOUBLE=OFF -DGMX_SIMD=IBM_VSX -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=xlc -DCMAKE_C_FLAGS_RELEASE="-O3 -qarch=pwr9 -qtune=pwr9 -DNDEBUG" -DCMAKE_CXX_COMPILER=xlC -DCMAKE_CXX_FLAGS_RELEASE="-O3 -qarch=pwr9 -qtune=pwr9 -DNDEBUG" -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DCMAKE_INSTALL_PREFIX=~/.local
 ```
 
+Step 2
+
+```
+module load openmpi/
+```
 
 ## Perseus
 

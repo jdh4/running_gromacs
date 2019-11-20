@@ -78,6 +78,13 @@ cmake .. -DGMX_BUILD_MDRUN_ONLY=ON -DGMX_FFT_LIBRARY=fftw3 -DGMX_BUILD_OWN_FFTW=
 ## Perseus
 
 ```
+cmake fails with when using intel/19.0.5
+-- Checking for 64-bit off_t
+*** Error in `/opt/intel/compilers_and_libraries_2019.5.281/linux/bin/intel64/icc': free(): invalid next size (fast): 0x00002addf0000970 ***
+```
+
+
+```
 For test suite output see /build_info
 
 The building is done in a two stage process. The serial

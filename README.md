@@ -1,3 +1,3 @@
 # Running Gromacs
 
-This guide presents best practices with Gromacs on the Princeton HPC.
+This guide presents the best practices for Gromacs on the Princeton HPC clusters.

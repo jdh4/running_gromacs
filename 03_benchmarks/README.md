@@ -1,5 +1,13 @@
 # Benchmarks
 
+GPU benchmark:
+
+```
+wget ftp://ftp.gromacs.org/pub/benchmarks/rnase_bench_systems.tar.gz
+```
+
+
+
 The CPU benchmark input files were obtained from [this page](http://www.gromacs.org/About_Gromacs/Benchmarks):
 
 ```

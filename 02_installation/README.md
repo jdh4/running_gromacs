@@ -103,6 +103,26 @@ srun gmx_mpi mdrun -s methane_npt.tpr -v -c methane_npt.gro
 
 ## Traverse
 
+### FFTW
+
+```
+#!/bin/bash
+
+wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.8.tar.gz
+tar -zxvf fftw-3.3.8.tar.gz
+cd fftw-3.3.8
+
+module load rh/devtoolset/8
+
+./configure CC=gcc CFLAGS="-Ofast -mcpu=power9 -mtune=power9 -DNDEBUG" --prefix=$HOME/.local \
+--enable-shared --enable-single --enable-vsx --disable-fortran
+
+make
+make install
+```
+
+### GROMACS
+
 Do not use rh/devtoolset/8 since the code will not compile.
 
 2019.4

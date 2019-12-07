@@ -2,7 +2,7 @@
 
 ## Perseus
 
-```
+```bash
 #!/bin/bash
 
 wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-2019.4.tar.gz
@@ -16,16 +16,21 @@ module load intel/19.0/64/19.0.1.144
 
 OPTFLAGS="-Ofast -xHost -mtune=broadwell -DNDEBUG"
 
-cmake3 .. -DGMX_FFT_LIBRARY=mkl -DGMX_MPI=OFF -DGMX_SIMD=AVX2_256 -DGMX_GPU=OFF -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" -DCMAKE_CXX_COMPILER=icpc \
--DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
--DCMAKE_INSTALL_PREFIX=$HOME/.local
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=OFF -DGMX_MPI=OFF -DGMX_OPENMP=ON \
+-DGMX_SIMD=AVX2_256 -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=mkl \
+-DGMX_GPU=OFF \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
 make -j 10
 make check
 make install
 
-echo '\nStarting stage 2 build of mdrun_mpi\n' 
+# starting stage 2 build of mdrun_mpi
 
 cd ..
 mkdir build_stage2
@@ -33,10 +38,15 @@ cd build_stage2
 
 module load intel-mpi/intel/2018.3/64
 
-cmake3 .. -DGMX_FFT_LIBRARY=mkl -DGMX_MPI=ON -DGMX_SIMD=AVX2_256 -DGMX_GPU=OFF -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" -DCMAKE_CXX_COMPILER=icpc \
--DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
--DGMX_BUILD_MDRUN_ONLY=ON -DCMAKE_INSTALL_PREFIX=$HOME/.local
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=ON -DGMX_MPI=ON -DGMX_OPENMP=ON \
+-DGMX_SIMD=AVX2_256 -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=mkl \
+-DGMX_GPU=OFF \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
 make -j 10
 source ../build_stage1/scripts/GMXRC
@@ -93,6 +103,74 @@ srun gmx_mpi mdrun -s methane_npt.tpr -v -c methane_npt.gro
 
 ## Traverse
 
+Do not use rh/devtoolset/8 since the code will not compile.
+
+2019.4
+
+```bash
+#!/bin/bash
+
+wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-2019.4.tar.gz
+tar -zxvf gromacs-2019.4.tar.gz
+cd gromacs-2019.4
+mkdir build_stage1
+cd build_stage1
+
+module purge
+module load rh/devtoolset/7
+
+OPTFLAGS="-Ofast -mcpu=power9 -mtune=power9 -DNDEBUG"
+
+cmake3 .. -DGMX_FFT_LIBRARY=fftw3 -DFFTWF_LIBRARY=$HOME/.local/include \
+-DFFTWF_LIBRARY=$HOME/.local/lib/libfftw3f.so -DGMX_MPI=OFF -DGMX_SIMD=IBM_VSX -DGMX_GPU=OFF \
+-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" -DGMX_COOL_QUOTES=OFF \
+-DGMX_DOUBLE=OFF -DGMX_OPENMP=ON \
+-DREGRESSIONTEST_DOWNLOAD=ON -DCMAKE_INSTALL_PREFIX=$HOME/.local
+
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=OFF -DGMX_MPI=OFF -DGMX_OPENMP=ON \
+-DGMX_SIMD=IBM_VSX -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=fftw3 \
+-DFFTWF_LIBRARY=$HOME/.local/include \
+-DFFTWF_LIBRARY=$HOME/.local/lib/libfftw3f.so \
+-DGMX_GPU=OFF \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
+
+make -j 10
+make check
+make install
+
+# starting stage 2 build of mdrun_mpi
+
+cd ..
+mkdir build_stage2
+cd build_stage2
+
+module load openmpi/devtoolset-8/4.0.1/64
+module load cudatoolkit
+
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=ON -DGMX_MPI=ON -DGMX_OPENMP=ON \
+-DGMX_SIMD=IBM_VSX -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=fftw3 \
+-DFFTWF_LIBRARY=$HOME/.local/include \
+-DFFTWF_LIBRARY=$HOME/.local/lib/libfftw3f.so \
+-DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=70 \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
+
+make -j 10
+source ../build_stage1/scripts/GMXRC
+tests/regressiontests-2019.4/gmxtest.pl all
+make install
+```
+
 Step 1
 
 ```
@@ -121,7 +199,7 @@ fftw/gcc/3.3.8         2) openmpi/gcc/4.0.1/64   3) cudatoolkit/10.1
 cmake .. -DGMX_BUILD_MDRUN_ONLY=ON -DGMX_FFT_LIBRARY=fftw3 -DGMX_BUILD_OWN_FFTW=OFF -DCMAKE_INCLUDE_PATH=/usr/local/fftw/gcc/3.3.8/include -DCMAKE_LIBRARY_PATH=/usr/local/fftw/gcc/3.3.8/lib64 -DGMX_MPI=ON -DGMX_GPU=ON -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.0 -DGMX_CUDA_TARGET_SM=70 -DGMX_CUDA_TARGET_COMPUTE=70 -DGMX_OPENMP=ON -DGMX_DOUBLE=OFF -DGMX_SIMD=IBM_VSX -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=xlc -DCMAKE_C_FLAGS_RELEASE="-O3 -qarch=pwr9 -qtune=pwr9 -DNDEBUG" -DCMAKE_CXX_COMPILER=xlC -DCMAKE_CXX_FLAGS_RELEASE="-O3 -qarch=pwr9 -qtune=pwr9 -DNDEBUG" -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DCMAKE_INSTALL_PREFIX=~/.local
 ```
 
-## Perseus
+## old Perseus
 
 ```
 cmake fails with when using intel/19.0.5

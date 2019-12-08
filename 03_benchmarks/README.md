@@ -35,6 +35,7 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 | tigerGpu              |     8.0   | 216.6         |   1      | 2               |        1          |   2         | 1     |
 | tigerGpu              |     6.0   | 288.8         |   1      | 4               |        1          |   4         | 1     |
 | tigerGpu              |     5.2   | 333.9         |   1      | 8               |        1          |   8         | 1     |
+| tigerGpu              |     5.3   | 325.1         |   1      |16               |        1          |  16         | 1     |
 | tigerGpu              |    12.4   | 139.2         |   1      | 1               |        1          |   1         | 2     |
 | tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
 | tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |

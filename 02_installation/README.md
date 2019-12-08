@@ -6,6 +6,10 @@ Notes:
 2. Gromacs only uses serial FFT's so one does not need an MPI-enabled FFT module
 3. 
 
+Questions:
+
+1. Thread MPI vs MPI for a single node
+
 ## Perseus
 
 ```bash

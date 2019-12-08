@@ -23,3 +23,5 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/gmxbench-3.0.tar.gz
 | perseus               |    32.9   | 52.5          |   4      | 2               |  8          | 0     |
 | perseus               |    17.6   | 98.2          |   16     | 1               |  16         | 0     |
 | perseus               |    92.1   | 18.8          |   4      | 4               |  16         | 0     |
+| traverse              |    16.9   | 102.0         |   1      | 1               |  1          | 1     |
+| traverse              |    58.3   | 29.7          |   2      | 1               |  2          | 1     |

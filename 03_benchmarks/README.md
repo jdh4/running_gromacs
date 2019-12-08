@@ -47,7 +47,6 @@ Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 #SBATCH --nodes=1                # node count
 #SBATCH --ntasks=1               # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
 #SBATCH --mem=4G                 # memory per cpu-core (4G is default)
 #SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)

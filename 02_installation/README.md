@@ -56,54 +56,91 @@ make install
 
 ## TigerGPU
 
-```
+```bash
 #!/bin/bash
-wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-2019.2.tar.gz
-tar xf gromacs-2019.2.tar.gz
-cd gromacs-2019.2
-mkdir build
-cd build
+version=2019.4
+wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
+tar -zxvf gromacs-${version}.tar.gz
+cd gromacs-${version}
+mkdir build_stage1
+cd build_stage1
 
 module purge
-module load intel/19.0/64/19.0.3.199
-module load intel-mpi/intel/2018.3/64
-module load cudatoolkit/10.1
-module load rh/devtoolset/7
+module load intel/19.0/64/19.0.1.144
 
-cmake3 .. -DGMX_FFT_LIBRARY=mkl -DGMX_MPI=ON -DGMX_DOUBLE=OFF -DGMX_SIMD=AVX2_256 \
--DREGRESSIONTEST_DOWNLOAD=ON -DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS="-xHost -O3 -DNDEBUG" \
--DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS="-xHost -O3 -DNDEBUG" -DGMX_GPU=ON \
--DGMX_CUDA_TARGET_SM=60 -DGMX_COOL_QUOTES=OFF \
--DCMAKE_INSTALL_PREFIX=/projects/SOFTWARE/gromacs/tigerGpu-intel-intelmpi-cuda/2019.2
+OPTFLAGS="-Ofast -xCORE-AVX2 -mtune=broadwell -DNDEBUG"
+
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=OFF -DGMX_MPI=OFF -DGMX_OPENMP=ON \
+-DGMX_SIMD=AVX2_256 -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=mkl \
+-DGMX_GPU=OFF \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
 make -j 10
 make check
+make install
+
+#############################################################
+# starting build of mdrun_mpi (stage 2)
+#############################################################
+
+cd ..
+mkdir build_stage2
+cd build_stage2
+
+module load intel-mpi/intel/2019.1/64
+module load cudatoolkit
+module load rh/devtoolset/7
+
+cmake3 .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
+-DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
+-DGMX_BUILD_MDRUN_ONLY=ON -DGMX_MPI=ON -DGMX_OPENMP=ON \
+-DGMX_SIMD=AVX2_256 -DGMX_DOUBLE=OFF \
+-DGMX_FFT_LIBRARY=mkl \
+-DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=60 \
+-DCMAKE_INSTALL_PREFIX=$HOME/.local \
+-DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
+#-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math --gpu-architecture=sm_60 --gpu-code=sm_60"
+
+make -j 10
+source ../build_stage1/scripts/GMXRC
+tests/regressiontests-${version}/gmxtest.pl all
 make install
 ```
 
 ```
 #!/bin/bash
-#SBATCH --job-name=cuda_c        # create a short name for your job
+#SBATCH --job-name=gmx           # create a short name for your job
 #SBATCH --nodes=1                # node count
-#SBATCH --ntasks=14              # total number of tasks across all nodes
+#SBATCH --ntasks=1               # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem-per-cpu=4G         # memory per cpu-core (4G is default)
-#SBATCH --gres=gpu:2             # number of gpus per node
+#SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --time=00:01:00          # total run time limit (HH:MM:SS)
-#SBATCH --mail-type=begin        # send email when job begins
-#SBATCH --mail-type=end          # send email when job ends
+#SBATCH --mail-type=all          # send email on job start, end and fail
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
-module load gromacs/tigerGpu/parallel/2019.2
+module load intel/19.0/64/19.0.1.144
+module load intel-mpi/intel/2019.1/64
+module load cudatoolkit
 
-srun gmx_mpi grompp -f npt_md.mdp -c methane_start.pdb -p methane.top -o methane_npt.tpr
-srun gmx_mpi mdrun -s methane_npt.tpr -v -c methane_npt.gro
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export GMX_MAXBACKUP=-1
+
+BCH=../gpu_bench/rnase_cubic
+srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 ```
 
 ## Traverse
 
-### FFTW
+#### FFTW
 
 ```
 #!/bin/bash
@@ -121,7 +158,7 @@ make
 make install
 ```
 
-### GROMACS
+#### GROMACS
 
 Do not use rh/devtoolset/8 since the code will not compile.
 

@@ -1,38 +1,16 @@
 # Benchmarks
 
-GPU benchmark:
+GPU benchmark input files:
 
 ```
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/rnase_bench_systems.tar.gz
 $ tar -zxvf rnase_bench_systems.tar.gz
-$ ls
-
-```
-
-24040 Atoms
-
-```
-#!/bin/bash
-#SBATCH --job-name=rnase         # create a short name for your job
-#SBATCH --nodes=1                # node count
-#SBATCH --ntasks=1               # total number of tasks across all nodes
-#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
-#SBATCH --mem=4G                 # memory per cpu-core (4G is default)
-#SBATCH --gres=gpu:1             # number of gpus per node
-#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
-
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export GMX_MAXBACKUP=-1
-
-module purge
-module load intel/19.0/64/19.0.1.144
-module load intel-mpi/intel/2019.1/64
-module load cudatoolkit/10.1
-
-BCH=../gpu_bench/rnase_cubic
-srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-srun mdrun_mpi -s bench.tpr -c conf.gro
+$ ls -l
+total 1536
+-rw-r--r--. 1 jdh4 cses 1571724 Dec  8 11:36 rnase_bench_systems.tar.gz
+drwxr-xr-x. 2 jdh4 cses     102 Dec  8 11:37 rnase_cubic
+drwxr-xr-x. 2 jdh4 cses     102 Dec  8 11:37 rnase_dodec
+drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 ```
 
 ## RNASE-cubic (single node)
@@ -60,6 +38,34 @@ srun mdrun_mpi -s bench.tpr -c conf.gro
 | tigerGpu              |    12.4   | 139.2         |   1      | 1               |        1          |   1         | 2     |
 | tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
 | tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |
+
+Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=rnase         # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
+#SBATCH --mem=4G                 # memory per cpu-core (4G is default)
+#SBATCH --gres=gpu:1             # number of gpus per node
+#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export GMX_MAXBACKUP=-1
+
+module purge
+module load intel/19.0/64/19.0.1.144
+module load intel-mpi/intel/2019.1/64
+module load cudatoolkit/10.1
+
+BCH=../gpu_bench/rnase_cubic
+srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+srun mdrun_mpi -s bench.tpr -c conf.gro
+```
+
+The contents of `md.log` is shown below:
 
 ```
 $ cat md.log

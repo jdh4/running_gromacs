@@ -154,15 +154,23 @@ srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 
 ## Traverse
 
+Note that `rh/devtoolset/8` cannot be used to compile Gromacs.
+
 #### FFTW
 
 ```
 #!/bin/bash
+
+#############################################################
+# build a fast version FFTW
+#############################################################
+
 version=3.3.8
 wget ftp://ftp.fftw.org/pub/fftw/fftw-${version}.tar.gz
 tar -zxvf fftw-${version}.tar.gz
 cd fftw-${version}
 
+module purge
 module load rh/devtoolset/8
 
 ./configure CC=gcc CFLAGS="-Ofast -mcpu=power9 -mtune=power9 -DNDEBUG" --prefix=$HOME/.local \
@@ -170,14 +178,12 @@ module load rh/devtoolset/8
 
 make
 make install
-```
+cd ..
 
-#### GROMACS
+#############################################################
+# starting build of gmx (stage 1)
+#############################################################
 
-Do not use rh/devtoolset/8 since the code will not compile.
-
-```bash
-#!/bin/bash
 version=2019.4
 wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
 tar -zxvf gromacs-${version}.tar.gz
@@ -206,7 +212,9 @@ make -j 10
 make check
 make install
 
-# starting stage 2 build of mdrun_mpi
+#############################################################
+# starting build of mdrun_mpi (stage 2)
+#############################################################
 
 cd ..
 mkdir build_stage2
@@ -336,3 +344,6 @@ srun mdrun_mpi -s methane_npt.tpr -v -c methane_npt.gro
 ## TigerCPU
 
 ## Adroit
+
+```
+```

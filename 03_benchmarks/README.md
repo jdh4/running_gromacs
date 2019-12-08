@@ -73,7 +73,7 @@ module load cudatoolkit/10.1
 
 BCH=../gpu_bench/rnase_cubic
 srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-srun mdrun_mpi -s bench.tpr -c conf.gro
+srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 ```
 
 The contents of `md.log` is shown below:

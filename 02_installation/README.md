@@ -6,7 +6,7 @@ The code can be built with:
 
 ```
 $ ssh <NetID>@tigergpu.princeton.edu
-$ cd /path/to/software/directory  # e.g., cd ~/software
+$ cd </path/to/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigerGpu.sh>
 $ bash tigerGpu.sh | tee build.log
 ```

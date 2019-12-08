@@ -9,7 +9,7 @@ $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_in
 $ bash tigerGpu.sh | tee build.log
 ```
 
-The installation script is shown below:
+The installation script is shown below (follow the directions above you do not need to copy this):
 
 ```bash
 #!/bin/bash

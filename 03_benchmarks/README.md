@@ -29,3 +29,11 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/gmxbench-3.0.tar.gz
 | traverse              |    18.5   | 93.2          |   1      | 2               |        1          |   2         | 1     |
 | traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   4 (16)    | 1     |
 | traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |
+| tigerGpu              |    11.1   | 156.1         |   1      | 1               |        1          |   1         | 1     |
+| tigerGpu              |    23.0   | 75.1          |   2      | 1               |        1          |   2         | 1     |
+| tigerGpu              |     8.0   | 216.6         |   1      | 2               |        1          |   2         | 1     |
+| tigerGpu              |     6.0   | 288.8         |   1      | 4               |        1          |   4         | 1     |
+| tigerGpu              |     5.2   | 333.9         |   1      | 8               |        1          |   8         | 1     |
+| tigerGpu              |    12.4   | 139.2         |   1      | 1               |        1          |   1         | 2     |
+| tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
+| tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |

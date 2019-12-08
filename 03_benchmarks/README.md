@@ -27,4 +27,5 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/gmxbench-3.0.tar.gz
 | traverse              |    16.9   | 102.5         |   1      | 1               |        4          |   1         | 1     |
 | traverse              |    58.3   | 29.7          |   2      | 1               |        1          |   2         | 1     |
 | traverse              |    18.5   | 93.2          |   1      | 2               |        1          |   2         | 1     |
-| traverse              |    xxxx   | xxxx          |   1      | 1               |        1          |   1         | 2     |
+| traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   4 (16)    | 1     |
+| traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |

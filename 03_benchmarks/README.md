@@ -15,21 +15,8 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 
 ## RNASE-cubic (single node)
 
-| cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPU  |
+| cluster              | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs  |
 |:----------------------|----------:|:-------------:|---------:|:---------------:|:-----------------:|------------:|:-----:|
-| perseus               |   228.9   |  7.5          |   1      | 1               |        1          |  1          | 0     |
-| perseus               |   109.2   | 15.8          |   2      | 1               |        1          |  2          | 0     |
-| perseus               |    60.0   | 28.8          |   4      | 1               |        1          |  4          | 0     |
-| perseus               |    32.2   | 53.6          |   8      | 1               |        1          |  8          | 0     |
-| perseus               |    32.9   | 52.5          |   4      | 2               |        1          |  8          | 0     |
-| perseus               |    17.6   | 98.2          |   16     | 1               |        1          |  16         | 0     |
-| perseus               |    92.1   | 18.8          |   4      | 4               |        1          |  16         | 0     |
-| traverse              |    16.9   | 102.0         |   1      | 1               |        1          |   1         | 1     |
-| traverse              |    16.9   | 102.5         |   1      | 1               |        4          |   1         | 1     |
-| traverse              |    58.3   | 29.7          |   2      | 1               |        1          |   2         | 1     |
-| traverse              |    18.5   | 93.2          |   1      | 2               |        1          |   2         | 1     |
-| traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   4 (16)    | 1     |
-| traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |
 | tigerGpu              |    11.1   | 156.1         |   1      | 1               |        1          |   1         | 1     |
 | tigerGpu              |    23.0   | 75.1          |   2      | 1               |        1          |   2         | 1     |
 | tigerGpu              |     8.0   | 216.6         |   1      | 2               |        1          |   2         | 1     |
@@ -39,6 +26,19 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 | tigerGpu              |    12.4   | 139.2         |   1      | 1               |        1          |   1         | 2     |
 | tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
 | tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |
+| traverse              |    16.9   | 102.0         |   1      | 1               |        1          |   1 (4)     | 1     |
+| traverse              |    16.9   | 102.5         |   1      | 1               |        4          |   1 (4)     | 1     |
+| traverse              |    58.3   | 29.7          |   2      | 1               |        1          |   2 (8)     | 1     |
+| traverse              |    18.5   | 93.2          |   1      | 2               |        1          |   2 (8)     | 1     |
+| traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   4 (16)    | 1     |
+| traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |
+| perseus               |   228.9   |  7.5          |   1      | 1               |        1          |  1          | 0     |
+| perseus               |   109.2   | 15.8          |   2      | 1               |        1          |  2          | 0     |
+| perseus               |    60.0   | 28.8          |   4      | 1               |        1          |  4          | 0     |
+| perseus               |    32.2   | 53.6          |   8      | 1               |        1          |  8          | 0     |
+| perseus               |    32.9   | 52.5          |   4      | 2               |        1          |  8          | 0     |
+| perseus               |    17.6   | 98.2          |   16     | 1               |        1          |  16         | 0     |
+| perseus               |    92.1   | 18.8          |   4      | 4               |        1          |  16         | 0     |
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

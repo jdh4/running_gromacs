@@ -1,5 +1,11 @@
 # Installation
 
+Notes:
+
+1. Reference Slurm variables instead of introducing duplication: `SLURM_CPUS_PER_TASK`, `SLURM_NTASKS`, `SLURM_NODES`
+2. Gromacs only uses serial FFT's so one does not need an MPI-enabled FFT module
+3. 
+
 ## Perseus
 
 ```bash
@@ -65,6 +71,10 @@ cd gromacs-${version}
 mkdir build_stage1
 cd build_stage1
 
+#############################################################
+# starting build of gmx (stage 1)
+#############################################################
+
 module purge
 module load intel/19.0/64/19.0.1.144
 
@@ -105,7 +115,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=60 \
 -DCMAKE_INSTALL_PREFIX=$HOME/.local \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
-#-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math --gpu-architecture=sm_60 --gpu-code=sm_60"
+#-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math -arch=sm_60 --gpu-code=sm_60"
 
 make -j 10
 source ../build_stage1/scripts/GMXRC
@@ -144,10 +154,10 @@ srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 
 ```
 #!/bin/bash
-
-wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.8.tar.gz
-tar -zxvf fftw-3.3.8.tar.gz
-cd fftw-3.3.8
+version=3.3.8
+wget ftp://ftp.fftw.org/pub/fftw/fftw-${version}.tar.gz
+tar -zxvf fftw-${version}.tar.gz
+cd fftw-${version}
 
 module load rh/devtoolset/8
 
@@ -162,14 +172,12 @@ make install
 
 Do not use rh/devtoolset/8 since the code will not compile.
 
-2019.4
-
 ```bash
 #!/bin/bash
-
-wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-2019.4.tar.gz
-tar -zxvf gromacs-2019.4.tar.gz
-cd gromacs-2019.4
+version=2019.4
+wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
+tar -zxvf gromacs-${version}.tar.gz
+cd gromacs-${version}
 mkdir build_stage1
 cd build_stage1
 
@@ -217,7 +225,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 
 make -j 10
 source ../build_stage1/scripts/GMXRC
-tests/regressiontests-2019.4/gmxtest.pl all
+tests/regressiontests-${version}/gmxtest.pl all
 make install
 ```
 

@@ -55,7 +55,7 @@ mkdir build_stage2
 cd build_stage2
 
 module load intel-mpi/intel/2019.1/64
-module load cudatoolkit
+module load cudatoolkit/10.1
 module load rh/devtoolset/7
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
@@ -92,7 +92,7 @@ Below is a sample Slurm script:
 module purge
 module load intel/19.0/64/19.0.1.144
 module load intel-mpi/intel/2019.1/64
-module load cudatoolkit
+module load cudatoolkit/10.1
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export GMX_MAXBACKUP=-1

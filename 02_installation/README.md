@@ -216,7 +216,7 @@ cd build_stage1
 module purge
 module load intel/19.0/64/19.0.1.144
 
-OPTFLAGS="-Ofast -xHost -mtune=broadwell -DNDEBUG"
+OPTFLAGS="-Ofast -xCORE-AVX2 -mtune=broadwell -DNDEBUG"
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \

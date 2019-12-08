@@ -1,6 +1,6 @@
 # Benchmarks
 
-GPU benchmark input files:
+GPU benchmark input files from [this page](http://www.gromacs.org/GPU_acceleration):
 
 ```
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/rnase_bench_systems.tar.gz

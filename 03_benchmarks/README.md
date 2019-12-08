@@ -76,7 +76,7 @@ srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o ben
 srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 ```
 
-The contents of `md.log` is shown below:
+The contents of `md.log` is shown below for 1 core and 1 GPU on TigerGPU:
 
 ```
 $ cat md.log

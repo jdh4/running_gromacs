@@ -43,6 +43,9 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 | traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   1 (4)     | 1     |
 | traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |
 | traverse              |     7.0   | 245.3         |   1      | 16              |        1          |   16 (64)   | 1     |
+| traverse*             |     4.2   | 413.0         |   1      | 16              |        1          |   16 (64)   | 1     |
+| traverse*             |     4.9   | 351.1         |   1      | 32              |        1          |   16 (64)   | 1     |
+| traverse*             |    10.4   | 166.1         |   4      | 4               |        1          |   16 (64)   | 1     |
 | traverse              |    10.6   | 162.9         |   1      | 16              |        4          |   4 (16)    | 1     |
 | traverse              |    7.1    | 243.1         |   1      | 32              |        1          |   32 (128)  | 1     |
 | traverse              |    11.4   | 151.1         |   1      | 32              |        4          |   8 (32)    | 1     |
@@ -55,6 +58,8 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 | perseus               |    32.9   | 52.5          |   4      | 2               |        1          |  8          | 0     |
 | perseus               |    17.6   | 98.2          |   16     | 1               |        1          |  16         | 0     |
 | perseus               |    92.1   | 18.8          |   4      | 4               |        1          |  16         | 0     |
+
+* -pin on
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

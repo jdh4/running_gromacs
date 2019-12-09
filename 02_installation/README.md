@@ -197,7 +197,7 @@ Notes:
 
 1. Reference Slurm variables instead of introducing duplication: `SLURM_CPUS_PER_TASK`, `SLURM_NTASKS`, `SLURM_NODES`
 2. Gromacs only uses serial FFT's so one does not need an MPI-enabled FFT module
-3. 
+3. use srun in favor of mpirun -np 16
 
 Questions:
 

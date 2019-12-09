@@ -11,6 +11,8 @@ total 1536
 drwxr-xr-x. 2 jdh4 cses     102 Dec  8 11:37 rnase_cubic
 drwxr-xr-x. 2 jdh4 cses     102 Dec  8 11:37 rnase_dodec
 drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
+
+$ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
 
 ## RNASE-cubic (single node)

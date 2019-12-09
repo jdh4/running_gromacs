@@ -15,7 +15,7 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 
 ## RNASE-cubic (single node)
 
-| cluster              | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | phys. cores |  GPUs  |
+| cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | toal cores |  GPUs  |
 |:----------------------|----------:|:-------------:|---------:|:---------------:|:-----------------:|:-----------:|:-----:|
 | adroit (v100)         |    10.5   | 163.9         |   1      | 1               |        1          |   1         | 1     |
 | adroit (v100)         |    18.6   |  93.1         |   2      | 1               |        1          |   2         | 1     |

@@ -15,7 +15,7 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 
 ## RNASE-cubic (single node)
 
-| cluster              | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs  |
+| cluster              | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total phys. cores |  GPUs  |
 |:----------------------|----------:|:-------------:|---------:|:---------------:|:-----------------:|------------:|:-----:|
 | adroit (v100)         |    10.5   | 163.9         |   1      | 1               |        1          |   1         | 1     |
 | adroit (v100)         |    18.6   |  93.1         |   2      | 1               |        1          |   2         | 1     |
@@ -38,10 +38,9 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 | tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
 | tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |
 | traverse              |    16.9   | 102.0         |   1      | 1               |        1          |   1 (4)     | 1     |
-| traverse              |    16.9   | 102.5         |   1      | 1               |        4          |   1 (4)     | 1     |
 | traverse              |    58.3   | 29.7          |   2      | 1               |        1          |   2 (8)     | 1     |
 | traverse              |    18.5   | 93.2          |   1      | 2               |        1          |   2 (8)     | 1     |
-| traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   4 (16)    | 1     |
+| traverse              |    33.3   | 51.9          |   4      | 1               |        4          |   1 (4)     | 1     |
 | traverse              |    86.5   | 20.0          |   4      | 1               |        1          |   4 (16)    | 1     |
 | traverse              |     7.0   | 245.3         |   1      | 16              |        1          |   16 (64)   | 1     |
 | traverse              |    10.6   | 162.9         |   1      | 16              |        4          |   4 (16)    | 1     |

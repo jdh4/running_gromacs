@@ -141,8 +141,9 @@ cd build_stage1
 
 module purge
 module load rh/devtoolset/7
+module load cudatoolkit/10.2
 
-OPTFLAGS="-Ofast -mcpu=power9 -mtune=power9 -DNDEBUG"
+OPTFLAGS="-Ofast -mcpu=power9 -mtune=power9 -mvsx -DNDEBUG"
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
@@ -152,7 +153,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_FFT_LIBRARY=fftw3 \
 -DFFTWF_LIBRARY=$HOME/.local/include \
 -DFFTWF_LIBRARY=$HOME/.local/lib/libfftw3f.so \
--DGMX_GPU=OFF \
+-DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=70 \
 -DGMX_EXTERNAL_BLAS=ON -DGMX_BLAS_USER=/usr/lib64/libessl.so \
 -DGMX_EXTERNAL_LAPACK=ON -DGMX_LAPACK_USER=/usr/lib64/libessl.so \
 -DCMAKE_INSTALL_PREFIX=$HOME/.local \
@@ -171,7 +172,6 @@ mkdir build_stage2
 cd build_stage2
 
 module load openmpi/devtoolset-8/4.0.1/64
-module load cudatoolkit
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \

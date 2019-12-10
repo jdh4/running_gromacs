@@ -76,6 +76,7 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | perseus               |    92.1   | 18.8          |   4      | 4               |        1          |  16         | 0     |
 | della [2]             |   222.2   | 7.8           |   1      | 1               |        1          |  1         | 0     |
 | della [3]             |   141.8   | 12.2          |   1      | 1               |        1          |  1         | 0     |
+| della [3]             |    29.7   | 58.1          |   1      | 8               |        1          |  1         | 0     |
 | della [3]             |    18.7   | 92.5          |   1      | 16              |        1          |  1         | 0     |
 | della [3]             |   xxx     | xxx           |   16     | 1               |        1          |  1         | 0     |
 

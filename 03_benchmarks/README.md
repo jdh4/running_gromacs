@@ -20,6 +20,10 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
 |:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
 | traverse*    |    125.3      | 13.8    |   1      | 1               |        1          |   1         | 1     |
+| traverse*    |     48.8      | 35.4    |   1      | 16              |        1          |   1         | 1     |
+| traverse*    |     30.0      | 57.6    |   1      | 1               |        16         |   1         | 1     |
+| traverse*    |     18.4      | 94.0    |   1      | 1               |        32         |   1         | 1     |
+| traverse*    |     18.4      |     |   1      | 4               |         8         |   1         | 4     |
 | traverse*    |     66.7      | 25.9    |   2      | 16              |        1          |   1         | 1     |
 | traverse*    |     79.1      | 21.8    |   2      | 32              |        1          |   1         | 1     |
 | traverse*    |     40.5      | 42.6    |   2      | 16              |        2          |   1         | 1     |

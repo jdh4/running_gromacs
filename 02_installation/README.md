@@ -267,6 +267,12 @@ make install
 Make two versions for Della: avx2 and avx512 if results say so;
 #SBATCH --exclude=della-r4c1n[1-16]
 
+If you ever need to run on one of the cascade lake nodes, you can create an exclusion list of all the other nodes:
+
+```
+snodes | grep -v 'cascade\|HOSTNAMES' | cut -c 1-13 | tr -s '\n' ',' | tr -d '[:blank:]' > exclude.nodes
+```
+
 ## Perseus
 
 ```bash

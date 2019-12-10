@@ -264,7 +264,8 @@ tests/regressiontests-${version}/gmxtest.pl all
 make install
 ```
 
-Make two versions for Della: avx2 and avx512 if results say so
+Make two versions for Della: avx2 and avx512 if results say so;
+#SBATCH --exclude=della-r4c1n[1-16]
 
 ## Perseus
 

@@ -206,6 +206,8 @@ Questions:
 
 ## Della
 
+Della is good for single node jobs. You should not be running small jobs on Tiger.
+
 ```bash
 #!/bin/bash
 version=2019.4

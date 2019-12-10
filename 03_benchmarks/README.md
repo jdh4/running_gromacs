@@ -74,11 +74,14 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | perseus               |    32.9   | 52.5          |   4      | 2               |        1          |  8          | 0     |
 | perseus               |    17.6   | 98.2          |   16     | 1               |        1          |  16         | 0     |
 | perseus               |    92.1   | 18.8          |   4      | 4               |        1          |  16         | 0     |
-| della (avx2)          |    222.2  | 7.8           |   1      | 1               |        1          |  1         | 0     |
-| della (avx512)        |    141.8  | 12.2          |   1      | 1               |        1          |  1         | 0     |
-
+| della [2]             |   222.2   | 7.8           |   1      | 1               |        1          |  1         | 0     |
+| della [3]             |   141.8   | 12.2          |   1      | 1               |        1          |  1         | 0     |
+| della [3]             |    18.7   | 92.5          |   1      | 16              |        1          |  1         | 0     |
+| della [3]             |   xxx     | xxx           |   16     | 1               |        1          |  1         | 0     |
 
 * -pin on
+[2] haswell node (avx2)
+[3] cascade node (avx512)
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

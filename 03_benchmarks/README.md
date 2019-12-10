@@ -79,6 +79,7 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | della [3]             |    29.7   | 58.1          |   1      | 8               |        1          |  1         | 0     |
 | della [3]             |    18.7   | 92.5          |   1      | 16              |        1          |  1         | 0     |
 | della [3]             |   xxx     | xxx           |   16     | 1               |        1          |  1         | 0     |
+| della [3]             |   9.2     | 187.8         |   8     | 2               |        (3 nodes)   |  48        | 0     |
 
 * -pin on
 [2] haswell node (avx2)

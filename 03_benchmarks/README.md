@@ -15,6 +15,16 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
 
+## ADH-cubic
+
+| cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
+|:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
+| traverse*    |    125.3      | 13.8    |   1      | 1               |        1          |   1         | 1     |
+| traverse*    |     66.7      | 25.9    |   2      | 16              |        1          |   1         | 1     |
+| traverse*    |     79.1      | 21.8    |   2      | 32              |        1          |   1         | 1     |
+| traverse*    |     40.5      | 42.6    |   2      | 16              |        2          |   1         | 1     |
+
+
 ## RNASE-cubic (single node)
 
 | cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs  |
@@ -71,7 +81,7 @@ Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 #SBATCH --nodes=1                # node count
 #SBATCH --ntasks=1               # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --mem=4G                 # memory per cpu-core (4G is default)
+#SBATCH --mem=4G                 # memory per node (4G is default)
 #SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
 

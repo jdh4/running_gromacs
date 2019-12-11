@@ -108,15 +108,15 @@ Note that `rh/devtoolset/8` cannot be used to compile Gromacs.
 
 ```bash
 #!/bin/bash
+version_fftw=3.3.8
+version_gmx=2019.4
 
 #############################################################
-# build a fast version FFTW
+# build a fast version of FFTW
 #############################################################
-
-version=3.3.8
-wget ftp://ftp.fftw.org/pub/fftw/fftw-${version}.tar.gz
-tar -zxvf fftw-${version}.tar.gz
-cd fftw-${version}
+wget ftp://ftp.fftw.org/pub/fftw/fftw-${version_fftw}.tar.gz
+tar -zxvf fftw-${version_fftw}.tar.gz
+cd fftw-${version_fftw}
 
 module purge
 module load rh/devtoolset/8
@@ -129,13 +129,11 @@ make install
 cd ..
 
 #############################################################
-# starting build of gmx (stage 1)
+# build gmx (for single node jobs)
 #############################################################
-
-version=2019.4
-wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
-tar -zxvf gromacs-${version}.tar.gz
-cd gromacs-${version}
+wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version_gmx}.tar.gz
+tar -zxvf gromacs-${version_gmx}.tar.gz
+cd gromacs-${version_gmx}
 mkdir build_stage1
 cd build_stage1
 
@@ -164,9 +162,8 @@ make check
 make install
 
 #############################################################
-# starting build of mdrun_mpi (stage 2)
+# build mdrun_mpi (for multi-node jobs)
 #############################################################
-
 cd ..
 mkdir build_stage2
 cd build_stage2
@@ -189,7 +186,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 
 make -j 10
 source ../build_stage1/scripts/GMXRC
-tests/regressiontests-${version}/gmxtest.pl all
+tests/regressiontests-${version_gmx}/gmxtest.pl all
 make install
 ```
 

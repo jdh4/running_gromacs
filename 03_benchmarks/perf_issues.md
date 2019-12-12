@@ -32,6 +32,28 @@ date
 srun gmx mdrun -pin on -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 ```
 
+## When no other jobs running on the node
+
+```
+$ cat slurm-37863.out
+traverse-k01g2
+...
+Wed Dec 11 23:17:01 EST 2019
+pid 31313's current affinity list: 0-63
+Wed Dec 11 23:17:01 EST 2019
+...
+Overriding thread affinity set outside gmx mdrun
+starting mdrun 'RNASE ZF-1A in water'
+10000 steps,     20.0 ps.
+
+Writing final coordinates.
+
+               Core t (s)   Wall t (s)        (%)
+       Time:       61.892        3.870     1599.4
+                 (ns/day)    (hour/ns)
+Performance:      446.590        0.054
+```
+
 ## When another job running on the node (GPU bus id = 2 via nvidia-smi)
 
 ```
@@ -55,26 +77,4 @@ Writing final coordinates.
        Time:      150.780        9.424     1599.9
                  (ns/day)    (hour/ns)
 Performance:      183.377        0.131
-```
-
-## When no other jobs running on the node
-
-```
-$ cat slurm-37863.out
-traverse-k01g2
-...
-Wed Dec 11 23:17:01 EST 2019
-pid 31313's current affinity list: 0-63
-Wed Dec 11 23:17:01 EST 2019
-...
-Overriding thread affinity set outside gmx mdrun
-starting mdrun 'RNASE ZF-1A in water'
-10000 steps,     20.0 ps.
-
-Writing final coordinates.
-
-               Core t (s)   Wall t (s)        (%)
-       Time:       61.892        3.870     1599.4
-                 (ns/day)    (hour/ns)
-Performance:      446.590        0.054
 ```

@@ -35,7 +35,8 @@ srun gmx mdrun -pin on -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 ## When another job running on the node (GPU bus id = 2 via nvidia-smi)
 
 ```
-$ cat slurm.out
+$ cat slurm-37864.out
+traverse-k02g4
 ...
 Wed Dec 11 23:19:01 EST 2019
 pid 22302's current affinity list: 96-111
@@ -59,6 +60,9 @@ Performance:      183.377        0.131
 ## When no other jobs running on the node
 
 ```
+$ cat slurm-37863.out
+traverse-k01g2
+...
 Wed Dec 11 23:17:01 EST 2019
 pid 31313's current affinity list: 0-63
 Wed Dec 11 23:17:01 EST 2019

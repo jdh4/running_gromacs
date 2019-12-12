@@ -99,7 +99,7 @@ export GMX_MAXBACKUP=-1
 
 BCH=../gpu_bench/rnase_cubic
 srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 ## Traverse
@@ -371,6 +371,8 @@ cd build_stage1
 
 module purge
 module load intel/19.0/64/19.0.1.144
+module load cudatoolkit/10.2
+module load rh/devtoolset/7
 
 OPTFLAGS="-Ofast -xCORE-AVX512 -mtune=skylake-avx512 -DNDEBUG"
 
@@ -380,7 +382,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_BUILD_MDRUN_ONLY=OFF -DGMX_MPI=OFF -DGMX_OPENMP=ON \
 -DGMX_SIMD=AVX_512 -DGMX_DOUBLE=OFF \
 -DGMX_FFT_LIBRARY=mkl \
--DGMX_GPU=OFF \
+-DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=70 \
 -DCMAKE_INSTALL_PREFIX=$HOME/.local \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
@@ -397,8 +399,6 @@ mkdir build_stage2
 cd build_stage2
 
 module load intel-mpi/intel/2018.3/64
-module load cudatoolkit/10.1
-module load rh/devtoolset/7
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \

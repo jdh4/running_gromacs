@@ -15,6 +15,7 @@
 
 hostname
 
+# OMP_PLACES
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export GMX_MAXBACKUP=-1
 

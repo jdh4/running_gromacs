@@ -105,11 +105,11 @@ export GMX_MAXBACKUP=-1
 module purge
 module load intel/19.0/64/19.0.1.144
 module load intel-mpi/intel/2019.1/64
-module load cudatoolkit/10.1
+module load cudatoolkit/10.2
 
 BCH=../gpu_bench/rnase_cubic
-srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+gmx mdrun -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 The contents of `md.log` is shown below for 1 core and 1 GPU on TigerGPU:

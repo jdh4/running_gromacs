@@ -158,7 +158,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
 make -j 10
-make check
+OMP_NUM_THREADS=64 make check
 make install
 
 #############################################################

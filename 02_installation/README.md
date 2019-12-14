@@ -200,7 +200,7 @@ see `env | grep SLURM | sort`
 Questions:
 
 1. Thread MPI vs MPI for a single node
-
+x. be sure to set `-ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK`
 
 ## Della
 

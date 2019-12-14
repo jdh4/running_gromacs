@@ -74,6 +74,7 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
+| tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu              |    30.1   |  57.4         |   2      | 4               |        1          |  8          | 0     |
 | tigerCpu              |    28.7   |  60.2         |   4      | 2               |        1          |  8          | 0     |
 | tigerCpu              |    26.3   |  65.8         |   1      | 8               |        1          |  8          | 0     |

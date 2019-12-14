@@ -67,6 +67,22 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | traverse              |    11.4   | 151.1         |   1      | 32              |        4          |   8 (32)    | 1     |
 | traverse              |    16.0   | 107.9         |   1      | 64              |        2          |   32 (128)  | 1     |
 | traverse              |    19.1   | 90.5          |   1      | 64              |        4          |   16 (64)   | 1     |
+| tigerCpu              |   116.0   | 14.9          |   1      | 1               |        1          |  1          | 0     |
+| tigerCpu              |    59.9   | 28.8          |   2      | 1               |        1          |  2          | 0     |
+| tigerCpu              |    34.0   | 50.9          |   4      | 1               |        1          |  4          | 0     |
+| tigerCpu              |    27.5   | 62.7          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
+| tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
+| tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
+| tigerCpu              |    30.1   |  57.4         |   2      | 4               |        1          |  8          | 0     |
+| tigerCpu              |    28.7   |  60.2         |   4      | 2               |        1          |  8          | 0     |
+| tigerCpu              |    26.3   |  65.8         |   1      | 8               |        1          |  8          | 0     |
+| tigerCpu              |    26.3   |  65.8         |   1      | 8               |        1          |  8          | 0     |
+| tigerCpu              |    14.7   | 117.9         |   1      | 16              |        1          |  16         | 0     |
+| tigerCpu              |    10.4   | 166.6         |   1      | 32              |        1          |  32         | 0     |
+| tigerCpu              |    14.9   | 116.2         |   4      | 8               |        1          |  32         | 0     |
+| tigerCpu              |    15.4   | 112.0         |   8      | 4               |        1          |  32         | 0     |
+| tigerCpu (n)          |    14.9   | 116.4         |   8      | 4               |        1          |  32         | 0     |
 | perseus               |   186.8   |  9.3          |   1      | 1               |        1          |  1          | 0     |
 | perseus               |   119.6   | 14.4          |   2      | 1               |        1          |  2          | 0     |
 | perseus               |    63.3   | 27.3          |   4      | 1               |        1          |  4          | 0     |
@@ -92,6 +108,7 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 [2] haswell node (avx2)
 [3] cascade node (avx512)
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
+(n) 16 ntasks-per-node
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

@@ -67,9 +67,9 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 | traverse              |    11.4   | 151.1         |   1      | 32              |        4          |   8 (32)    | 1     |
 | traverse              |    16.0   | 107.9         |   1      | 64              |        2          |   32 (128)  | 1     |
 | traverse              |    19.1   | 90.5          |   1      | 64              |        4          |   16 (64)   | 1     |
-| perseus               |   228.9   |  7.5          |   1      | 1               |        1          |  1          | 0     |
-| perseus               |   109.2   | 15.8          |   2      | 1               |        1          |  2          | 0     |
-| perseus               |    60.0   | 28.8          |   4      | 1               |        1          |  4          | 0     |
+| perseus               |   186.8   |  9.3          |   1      | 1               |        1          |  1          | 0     |
+| perseus               |   119.6   | 14.4          |   2      | 1               |        1          |  2          | 0     |
+| perseus               |    63.3   | 27.3          |   4      | 1               |        1          |  4          | 0     |
 | perseus               |    32.2   | 53.6          |   8      | 1               |        1          |  8          | 0     |
 | perseus               |    32.9   | 52.5          |   4      | 2               |        1          |  8          | 0     |
 | perseus               |    17.6   | 98.2          |   16     | 1               |        1          |  16         | 0     |

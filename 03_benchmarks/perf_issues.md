@@ -1,5 +1,7 @@
 # Performance Issues
 
+`srun -t 1 -l -n 4 -N 1 numactl -s | grep physc | sort`
+
 ```
 #!/bin/bash
 #SBATCH --nodes=1                # node count

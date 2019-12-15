@@ -113,6 +113,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
 (dbl) double precision version of the code (Intel with MKL)
 (avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
+(188) Version 2018.8
 
 ## RNASE with cubic box (multi-node)
 

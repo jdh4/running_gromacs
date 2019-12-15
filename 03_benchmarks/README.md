@@ -89,9 +89,10 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu              |    59.9   | 28.8          |   2      | 1               |        1          |  2          | 0     |
 | tigerCpu              |    34.0   | 50.9          |   4      | 1               |        1          |  4          | 0     |
 | tigerCpu              |    27.5   | 62.7          |   8      | 1               |        1          |  8          | 0     |
-| tigerCpu (fft)        |    27x5   | 62x7          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu (fft)        |    28.7   | 60.2          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (gcc)        |    27x5   | 62x7          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
+| tigerCpu (fft)        |    15.8   | 109.1         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |

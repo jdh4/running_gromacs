@@ -28,7 +28,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_DEFAULT_SUFFIX=OFF -DGMX_BINARY_SUFFIX=_gpu -DGMX_LIBS_SUFFIX=_gpu \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
-make
+make -j 10
 make check
 make install
 
@@ -53,7 +53,7 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_DEFAULT_SUFFIX=OFF -DGMX_BINARY_SUFFIX=_gpu_mpi -DGMX_LIBS_SUFFIX=_gpu_mpi \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
 
-make
+make -j 10
 source ../build_stage1/scripts/GMXRC
 tests/regressiontests-${version}/gmxtest.pl all
 make install

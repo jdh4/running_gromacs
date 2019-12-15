@@ -207,61 +207,59 @@ x. be sure to set `-ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK`
 Della is good for single node jobs. You should not be running small jobs on Tiger.
 
 ```bash
-#!/bin/bash
-version=2019.4
-wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
-tar -zxvf gromacs-${version}.tar.gz
-cd gromacs-${version}
-mkdir build_stage1
-cd build_stage1
+$ ssh <NetID>@della.princeton.edu
+$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della.sh>
+# make modifications to della.sh if needed
+$ bash della.sh | tee build.log
+```
 
-#############################################################
-# starting build of gmx (stage 1)
-#############################################################
+For single-node jobs:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gmx           # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --mem=4G                 # memory per node (4G is default)
+#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
+#SBATCH --constraint=cascade     # exclude ivy nodes
+#SBATCH --mail-type=all          # send email when job begins
+#SBATCH --mail-type=end          # send email when job ends
+#SBATCH --mail-user=<YourNetID>@princeton.edu
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export GMX_MAXBACKUP=-1
 
 module purge
 module load intel/19.0/64/19.0.1.144
 
-OPTFLAGS="-Ofast -xCORE-AVX2 -axCORE-AVX512 -DNDEBUG"
+gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
+gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
 
-cmake3 .. -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
--DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
--DGMX_BUILD_MDRUN_ONLY=OFF -DGMX_MPI=OFF -DGMX_OPENMP=ON \
--DGMX_DOUBLE=OFF \
--DGMX_FFT_LIBRARY=mkl \
--DGMX_GPU=OFF \
--DCMAKE_INSTALL_PREFIX=$HOME/.local \
--DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
+For multi-node MPI jobs:
 
-make -j 10
-make check
-make install
+```bash
+#!/bin/bash
+#SBATCH --job-name=gmx           # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --mem=4G                 # memory per node (4G is default)
+#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
+#SBATCH --constraint=cascade     # exclude ivy nodes
+#SBATCH --mail-type=all          # send email when job begins
+#SBATCH --mail-type=end          # send email when job ends
+#SBATCH --mail-user=<YourNetID>@princeton.edu
 
-#############################################################
-# starting build of mdrun_mpi (stage 2)
-#############################################################
-
-cd ..
-mkdir build_stage2
-cd build_stage2
-
+module purge
+module load intel/19.0/64/19.0.1.144
 module load intel-mpi/intel/2018.3/64
 
-cmake3 .. -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \
--DCMAKE_CXX_COMPILER=icpc -DCMAKE_CXX_FLAGS_RELEASE="$OPTFLAGS" \
--DGMX_BUILD_MDRUN_ONLY=ON -DGMX_MPI=ON -DGMX_OPENMP=ON \
--DGMX_DOUBLE=OFF \
--DGMX_FFT_LIBRARY=mkl \
--DGMX_GPU=OFF \
--DCMAKE_INSTALL_PREFIX=$HOME/.local \
--DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
-
-make -j 10
-source ../build_stage1/scripts/GMXRC
-tests/regressiontests-${version}/gmxtest.pl all
-make install
+gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
+srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 Make two versions for Della: avx2 and avx512 if results say so;
@@ -277,7 +275,7 @@ snodes | grep -v 'cascade\|HOSTNAMES' | cut -c 1-13 | tr -s '\n' ',' | tr -d '[:
 
 Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used for astrophysics research. Run these commands to build GROMACS on perseus:
 
-```
+```bash
 $ ssh <NetID>@tigergpu.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/perseus.sh>

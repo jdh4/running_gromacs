@@ -89,6 +89,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu              |    59.9   | 28.8          |   2      | 1               |        1          |  2          | 0     |
 | tigerCpu              |    34.0   | 50.9          |   4      | 1               |        1          |  4          | 0     |
 | tigerCpu              |    27.5   | 62.7          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu (fft)        |    27x5   | 62x7          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
@@ -128,6 +129,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 [3] cascade node (avx512)
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
 (n) 16 ntasks-per-node
+[fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
 
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
 

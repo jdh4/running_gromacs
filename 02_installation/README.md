@@ -226,7 +226,7 @@ For single-node jobs:
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --mail-type=all          # send email when job begins, ends and fails
 #SBATCH --mail-user=<YourNetID>@princeton.edu
-#SBATCH --constraint=cascade|skylake|broadwell|haswell # exclude ivy nodes
+#SBATCH --exclude=della-r4c1n[1-16] # exclude ivy nodes
 
 module purge
 module load intel/19.0/64/19.0.1.144

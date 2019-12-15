@@ -21,7 +21,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 
 | cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
 |:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
-| tigerCpu     |   209.9      |  8.2     |   1      |  1              |        4          |    4        | 0     |
+| tigerCpu     |   211.6      |  8.2     |   1      |  1              |        4          |    4        | 0     |
 | tigerCpu     |   209.9      |  8.2     |   1      |  4              |        1          |    4        | 0     |
 | tigerCpu     |   168.4      | 10.2     |   1      |  8              |        1          |    8        | 0     |
 | tigerCpu     |   137.1      | 12.6     |   1      | 10              |        1          |   10        | 0     |

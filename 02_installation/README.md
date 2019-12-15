@@ -17,30 +17,48 @@ One may try to use the Intel compiler for the CUDA code:
 #-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math -arch=sm_60 --gpu-code=sm_60"
 ```
 
-Below is a sample Slurm script:
+For single-node jobs:
 
 ```bash
 #!/bin/bash
 #SBATCH --job-name=gmx           # create a short name for your job
 #SBATCH --nodes=1                # node count
-#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --ntasks=16              # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --mem-per-cpu=4G         # memory per cpu-core (4G is default)
+#SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
+#SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --gres=gpu:1             # number of gpus per node
-#SBATCH --time=00:01:00          # total run time limit (HH:MM:SS)
-#SBATCH --mail-type=all          # send email on job start, end and fail
+#SBATCH --mail-type=all          # send email when job begins, ends and fails
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
 module load intel/19.0/64/19.0.1.144
-module load intel-mpi/intel/2019.1/64
 module load cudatoolkit/10.2
 
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export GMX_MAXBACKUP=-1
+gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
+gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
 
-BCH=../gpu_bench/rnase_cubic
-srun gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+For multi-node MPI jobs:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gmx           # create a short name for your job
+#SBATCH --nodes=4                # node count
+#SBATCH --ntasks-per-node=16     # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --mem-per-cpu=1G         # memory per cpu-core (4G per cpu-core is default)
+#SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
+#SBATCH --gres=gpu:1             # number of gpus per node
+#SBATCH --mail-type=all          # send email when job begins, ends and fails
+#SBATCH --mail-user=<YourNetID>@princeton.edu
+
+module purge
+module load intel/19.0/64/19.0.1.144
+module load cudatoolkit/10.2
+module load intel-mpi/intel/2019.5/64
+
+gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 

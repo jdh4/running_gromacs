@@ -185,7 +185,7 @@ module load cudatoolkit/10.2
 
 BCH=../gpu_bench/rnase_cubic
 gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-gmx mdrun -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 ```

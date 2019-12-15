@@ -67,12 +67,18 @@ cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DGMX_GPU=ON -DGMX_CUDA_TARGET_SM=60 \
 -DCMAKE_INSTALL_PREFIX=$HOME/.local \
 -DGMX_COOL_QUOTES=OFF -DREGRESSIONTEST_DOWNLOAD=ON
-#-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math -arch=sm_60 --gpu-code=sm_60"
+
 
 make -j 10
 source ../build_stage1/scripts/GMXRC
 tests/regressiontests-${version}/gmxtest.pl all
 make install
+```
+
+One may try to use the Intel compiler for the CUDA code:
+
+```
+#-DCUDA_NVCC_FLAGS_RELEASE="-ccbin=icpc -O3 --use_fast_math -arch=sm_60 --gpu-code=sm_60"
 ```
 
 Below is a sample Slurm script:

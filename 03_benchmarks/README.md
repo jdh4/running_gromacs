@@ -139,11 +139,16 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 
 ## RNASE with cubic box (multi-node)
 
-| cluster        | wall time (s)  | ns/day        | nodes    | ntasks  |  cpus-per-task    | total cores |  GPUs |
-|:---------------|---------------:|--------------:|:--------:|:-------:|:-----------------:|:-----------:|:-----:|
-| della [3]      |   9.2          | 187.8         |   3      |   8     | 2                 |  48         | 0     |
-| della [3]      |   32.6         | 53.1          |   3      |   2     | 8                 |  48         | 0     |
-| della [3]      |   32.6         | 251.7         |   3      |   16    | 1                 |  48         | 0     |
+| cluster        | wall time (s)  | ns/day        | nodes    | ntasks-per-node  |  cpus-per-task    | total cores |  GPUs |
+|:---------------|---------------:|--------------:|:--------:|:----------------:|:-----------------:|:-----------:|:-----:|
+| della [3]      |   15.6         | 263.5         |   3      |   16             | 1                 |  48         | 0     |
+| della [3]      |    8.3         | 209.0         |   3      |   8              | 2                 |  48         | 0     |
+| della [3]      |   32.6         | 135.9         |   3      |   2              | 8                 |  48         | 0     |
+| tigerCpu       |    8.8         | 197.1         |   3      |   16             | 1                 |  48         | 0     |
+| tigerCpu       |    9.4         | 183.6         |   3      |   8              | 2                 |  48         | 0     |
+| tigerCpu       |   12.8         | 135.3         |   3      |   2              | 8                 |  48         | 0     |
+
+
 [3] cascade node (avx512)
 
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.

@@ -15,6 +15,8 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
 
+Here we use cubic for larger systems should use octa. h-bonds to constrain all.
+
 ## ADH-cubic
 
 | cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |

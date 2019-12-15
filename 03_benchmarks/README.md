@@ -91,9 +91,11 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu              |    27.5   | 62.7          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (fft)        |    28.7   | 60.2          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (gcc)        |    29.4   | 58.8          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu (dbl)        |    53.9   | 32.1          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (fft)        |    15.8   | 109.1         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (gcc)        |    16.0   | 107.8         |   16     | 1               |        1          |  16         | 0     |
+| tigerCpu (dbl)        |    27.4   | 63.0          |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |
@@ -136,6 +138,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
 (n) 16 ntasks-per-node
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
+(dbl) double precision version of the code (Intel with MKL)
 
 ## RNASE with cubic box (multi-node)
 

@@ -120,19 +120,31 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | perseus (pme)         |    18.3   | 93.7          |   4      | 4               |        1          |  16         | 0     |
 | della [2]             |   222.2   | 7.8           |   1      | 1               |        1          |  1         | 0     |
 | della [3]             |   141.8   | 12.2          |   1      | 1               |        1          |  1         | 0     |
-| della [3]             |    29.7   | 58.1          |   1      | 8               |        1          |  1         | 0     |
-| della [3]             |    18.7   | 92.5          |   1      | 16              |        1          |  1         | 0     |
-| della [3]             |   xxx     | xxx           |   16     | 1               |        1          |  1         | 0     |
-| della [3]             |   9.2     | 187.8         |   8      | 2               |        (3 nodes)   |  48        | 0     |
-| della [3]             |   32.6    | 53.1          |   2      | 8               |        (3 nodes)   |  48        | 0     |
-| della [3]             |   32.6    | 251.7         |   16     | 1               |        (3 nodes)   |  48        | 0     |
+| della [3]             |    29.7   | 58.1          |   1      | 8               |        1          |  8         | 0     |
+| della [3] [512]       |    24.2   | 71.5          |   1      | 8               |        1          |  8         | 0     |
+| della [3] [512]       |    17.5   | 98.5          |   1      | 16              |        1          |  16        | 0     |
+| della [3] [512]       |    15.4   | 111.8         |   16     | 1               |        1          |  16        | 0     |
+| della [3] [512]       |    16.6   | 104.3         |   4      | 4               |        1          |  16        | 0     |
+| della [3]             |    17.8   | 97.3          |   1      | 16              |        1          |  16         | 0     |
+| della [3]             |    15.8   | 109.3         |   16     | 1               |        1          |  16         | 0     |
+| della [3]             |    17.1   | 101.2         |   4      | 4               |        1          |  16         | 0     |
+
 
 * -pin on
 [2] haswell node (avx2)
-[3] cascade node (avx512)
+[3] cascade node (avx512) `#SBATCH --constraint=cascade`
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
 (n) 16 ntasks-per-node
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
+
+## RNASE with cubic box (multi-node)
+
+| cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs |
+|:----------------------|----------:|--------------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
+| della [3]             |   9.2     | 187.8         |   8      | 2               |        (3 nodes)   |  48        | 0     |
+| della [3]             |   32.6    | 53.1          |   2      | 8               |        (3 nodes)   |  48        | 0     |
+| della [3]             |   32.6    | 251.7         |   16     | 1               |        (3 nodes)   |  48        | 0     |
+[3] cascade node (avx512)
 
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
 
@@ -161,6 +173,21 @@ module load cudatoolkit/10.2
 BCH=../gpu_bench/rnase_cubic
 gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
 gmx mdrun -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
+
+```
+$ seff 27868211
+Job ID: 27868211
+Cluster: della
+User/Group: jdh4/cses
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:04:47
+CPU Efficiency: 94.41% of 00:05:04 core-walltime
+Job Wall-clock time: 00:00:19
+Memory Utilized: 1.56 MB
+Memory Efficiency: 0.04% of 4.00 GB
 ```
 
 The contents of `md.log` is shown below for 1 core and 1 GPU on TigerGPU:

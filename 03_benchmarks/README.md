@@ -17,36 +17,6 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 
 Here we use cubic for larger systems should use octa. Using h-bonds instead of all-bonds constraints.
 
-## ADH with cubic box (single and multi-node)
-
-| cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
-|:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
-| tigerCpu     |   383.5      |  4.5     |   1      |  1              |        2          |    2        | 0     |
-| tigerCpu     |   211.6      |  8.2     |   1      |  1              |        4          |    4        | 0     |
-| tigerCpu     |   209.9      |  8.2     |   1      |  4              |        1          |    4        | 0     |
-| tigerCpu     |   168.4      | 10.2     |   1      |  8              |        1          |    8        | 0     |
-| tigerCpu (6) |   128.2      | 13.4     |   1      |  8              |        1          |    8        | 0     |
-| tigerCpu     |    88.1      | 19.6     |   1      |  16             |        1          |    16       | 0     |
-| tigerCpu (6) |    89.5      | 19.3     |   1      |  16             |        1          |    16       | 0     |
-| tigerCpu     |   137.1      | 12.6     |   1      | 10              |        1          |   10        | 0     |
-| tigerCpu     |    80.8      | 21.4     |   2      | 10              |        1          |   20        | 0     |
-| tigerCpu     |    41.9      | 41.2     |   4      | 10              |        1          |   40        | 0     |
-| tigerCpu     |    24.5      | 70.5     |   4      | 20              |        1          |   80        | 0     |
-| tigerCpu     |    25.7      | 67.3     |   2      | 40              |        1          |   80        | 0     |
-| tigerCpu     |    44.8      | 38.6     |   4      |  4              |        5          |   80        | 0     |
-| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
-| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
-| tigerCpu     |    24.6      | 70.2     |   8      | 10              |        1          |   80        | 0     |
-| traverse*    |    125.3     | 13.8     |   1      | 1               |        1          |   1         | 1     |
-| traverse*    |     48.8     | 35.4     |   1      | 16              |        1          |   1         | 1     |
-| traverse*    |     30.0     | 57.6     |   1      | 1               |        16         |   16        | 1     |
-| traverse*    |     18.4     | 94.0     |   1      | 1               |        32         |   32        | 1     |
-| traverse*    |     66.7     | 25.9     |   2      | 16              |        1          |   32        | 1     |
-| traverse*    |     79.1     | 21.8     |   2      | 32              |        1          |   64        | 1     |
-| traverse*    |     40.5     | 42.6     |   2      | 16              |        2          |   32        | 1     |
-
-(6) using gmx_cpu mdrun instead of mdrun_cpu_mpi
-
 ## RNASE with cubic box (single node)
 
 | cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs  |
@@ -92,12 +62,12 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu (fft)        |    28.7   | 60.2          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (gcc)        |    29.4   | 58.8          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (dbl)        |    53.9   | 32.1          |   8      | 1               |        1          |  8          | 0     |
-| tigerCpu (novec)      |   174.9   |  9.9          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu (avx2)       |    31.8   | 54.3          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (fft)        |    15.8   | 109.1         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (gcc)        |    16.0   | 107.8         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (dbl)        |    27.4   | 63.0          |   16     | 1               |        1          |  16         | 0     |
-| tigerCpu (novec)      |    84.7   | 20.4          |   16     | 1               |        1          |  16         | 0     |
+| tigerCpu (avx2)       |    17.9   | 96.3          |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |
@@ -160,6 +130,36 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
 
 Be carefaul with memory requests on all jobs including multi-node jobs.
+
+## ADH with cubic box (single and multi-node)
+
+| cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
+|:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
+| tigerCpu     |   383.5      |  4.5     |   1      |  1              |        2          |    2        | 0     |
+| tigerCpu     |   211.6      |  8.2     |   1      |  1              |        4          |    4        | 0     |
+| tigerCpu     |   209.9      |  8.2     |   1      |  4              |        1          |    4        | 0     |
+| tigerCpu     |   168.4      | 10.2     |   1      |  8              |        1          |    8        | 0     |
+| tigerCpu (6) |   128.2      | 13.4     |   1      |  8              |        1          |    8        | 0     |
+| tigerCpu     |    88.1      | 19.6     |   1      |  16             |        1          |    16       | 0     |
+| tigerCpu (6) |    89.5      | 19.3     |   1      |  16             |        1          |    16       | 0     |
+| tigerCpu     |   137.1      | 12.6     |   1      | 10              |        1          |   10        | 0     |
+| tigerCpu     |    80.8      | 21.4     |   2      | 10              |        1          |   20        | 0     |
+| tigerCpu     |    41.9      | 41.2     |   4      | 10              |        1          |   40        | 0     |
+| tigerCpu     |    24.5      | 70.5     |   4      | 20              |        1          |   80        | 0     |
+| tigerCpu     |    25.7      | 67.3     |   2      | 40              |        1          |   80        | 0     |
+| tigerCpu     |    44.8      | 38.6     |   4      |  4              |        5          |   80        | 0     |
+| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
+| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
+| tigerCpu     |    24.6      | 70.2     |   8      | 10              |        1          |   80        | 0     |
+| traverse*    |    125.3     | 13.8     |   1      | 1               |        1          |   1         | 1     |
+| traverse*    |     48.8     | 35.4     |   1      | 16              |        1          |   1         | 1     |
+| traverse*    |     30.0     | 57.6     |   1      | 1               |        16         |   16        | 1     |
+| traverse*    |     18.4     | 94.0     |   1      | 1               |        32         |   32        | 1     |
+| traverse*    |     66.7     | 25.9     |   2      | 16              |        1          |   32        | 1     |
+| traverse*    |     79.1     | 21.8     |   2      | 32              |        1          |   64        | 1     |
+| traverse*    |     40.5     | 42.6     |   2      | 16              |        2          |   32        | 1     |
+
+(6) using gmx_cpu mdrun instead of mdrun_cpu_mpi
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

@@ -63,11 +63,13 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu (gcc)        |    29.4   | 58.8          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (dbl)        |    53.9   | 32.1          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu (avx2)       |    31.8   | 54.3          |   8      | 1               |        1          |  8          | 0     |
+| tigerCpu (188)        |    28.6   | 60.4          |   8      | 1               |        1          |  8          | 0     |
 | tigerCpu              |    15.7   | 109.9         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (fft)        |    15.8   | 109.1         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (gcc)        |    16.0   | 107.8         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (dbl)        |    27.4   | 63.0          |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (avx2)       |    17.9   | 96.3          |   16     | 1               |        1          |  16         | 0     |
+| tigerCpu (188)        |    15.9   | 108.5         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |
@@ -103,7 +105,6 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | della [3]             |    15.8   | 109.3         |   16     | 1               |        1          |  16         | 0     |
 | della [3]             |    17.1   | 101.2         |   4      | 4               |        1          |  16         | 0     |
 
-
 * -pin on
 [2] haswell node (avx2)
 [3] cascade node (avx512) `#SBATCH --constraint=cascade`
@@ -111,7 +112,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 (n) 16 ntasks-per-node
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
 (dbl) double precision version of the code (Intel with MKL)
-(novec) -DGMX_SIMD=None and OPTFLAGS="-O3 -DNDEBUG"
+(avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
 
 ## RNASE with cubic box (multi-node)
 

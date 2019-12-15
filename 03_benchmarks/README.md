@@ -111,6 +111,8 @@ $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
 (n) 16 ntasks-per-node
 
+Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
+
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 
 ```bash

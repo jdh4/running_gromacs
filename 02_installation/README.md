@@ -245,7 +245,7 @@ For multi-node MPI jobs:
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem=4G                 # memory per node (4G is default)
 #SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
-#SBATCH --mail-type=all          # send email when job begins
+#SBATCH --mail-type=all          # send email when job begins, ends and fails
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 #SBATCH --constraint=cascade|skylake|broadwell|haswell # exclude ivy nodes
 

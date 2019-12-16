@@ -136,31 +136,33 @@ Be carefaul with memory requests on all jobs including multi-node jobs.
 
 ## ADH with cubic box (single and multi-node)
 
-| cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | total cores | GPUs  |
-|:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
-| tigerCpu     |   383.5      |  4.5     |   1      |  1              |        2          |    2        | 0     |
-| tigerCpu     |   211.6      |  8.2     |   1      |  1              |        4          |    4        | 0     |
-| tigerCpu     |   209.9      |  8.2     |   1      |  4              |        1          |    4        | 0     |
-| tigerCpu     |   168.4      | 10.2     |   1      |  8              |        1          |    8        | 0     |
-| tigerCpu (6) |   128.2      | 13.4     |   1      |  8              |        1          |    8        | 0     |
-| tigerCpu     |    88.1      | 19.6     |   1      |  16             |        1          |    16       | 0     |
-| tigerCpu (6) |    89.5      | 19.3     |   1      |  16             |        1          |    16       | 0     |
-| tigerCpu     |   137.1      | 12.6     |   1      | 10              |        1          |   10        | 0     |
-| tigerCpu     |    80.8      | 21.4     |   2      | 10              |        1          |   20        | 0     |
-| tigerCpu     |    41.9      | 41.2     |   4      | 10              |        1          |   40        | 0     |
-| tigerCpu     |    24.5      | 70.5     |   4      | 20              |        1          |   80        | 0     |
-| tigerCpu     |    25.7      | 67.3     |   2      | 40              |        1          |   80        | 0     |
-| tigerCpu     |    44.8      | 38.6     |   4      |  4              |        5          |   80        | 0     |
-| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
-| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |   80        | 0     |
-| tigerCpu     |    24.6      | 70.2     |   8      | 10              |        1          |   80        | 0     |
-| traverse*    |    125.3     | 13.8     |   1      | 1               |        1          |   1         | 1     |
-| traverse*    |     48.8     | 35.4     |   1      | 16              |        1          |   1         | 1     |
-| traverse*    |     30.0     | 57.6     |   1      | 1               |        16         |   16        | 1     |
-| traverse*    |     18.4     | 94.0     |   1      | 1               |        32         |   32        | 1     |
-| traverse*    |     66.7     | 25.9     |   2      | 16              |        1          |   32        | 1     |
-| traverse*    |     79.1     | 21.8     |   2      | 32              |        1          |   64        | 1     |
-| traverse*    |     40.5     | 42.6     |   2      | 16              |        2          |   32        | 1     |
+| cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | GPUs per node |
+|:-------------|-------------:|---------:|:--------:|:---------------:|:-----------------:|:-------------:|
+| tigerCpu     |   383.5      |  4.5     |   1      |  1              |        2          |     0     |
+| tigerCpu     |   211.6      |  8.2     |   1      |  1              |        4          |     0     |
+| tigerCpu     |   209.9      |  8.2     |   1      |  4              |        1          |     0     |
+| tigerCpu     |   168.4      | 10.2     |   1      |  8              |        1          |     0     |
+| tigerCpu (6) |   128.2      | 13.4     |   1      |  8              |        1          |     0     |
+| tigerCpu     |    88.1      | 19.6     |   1      |  16             |        1          |     0     |
+| tigerCpu (6) |    89.5      | 19.3     |   1      |  16             |        1          |     0     |
+| tigerCpu     |   137.1      | 12.6     |   1      | 10              |        1          |     0     |
+| tigerCpu     |    80.8      | 21.4     |   2      | 10              |        1          |     0     |
+| tigerCpu     |    41.9      | 41.2     |   4      | 10              |        1          |     0     |
+| tigerCpu     |    24.5      | 70.5     |   4      | 20              |        1          |     0     |
+| tigerCpu     |    25.7      | 67.3     |   2      | 40              |        1          |     0     |
+| tigerCpu     |    44.8      | 38.6     |   4      |  4              |        5          |     0     |
+| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |     0     |
+| tigerCpu     |    29.8      | 57.9     |   4      | 10              |        2          |     0     |
+| tigerCpu     |    24.6      | 70.2     |   8      | 10              |        1          |     0     |
+| traverse*    |    125.3     | 13.8     |   1      | 1               |        1          |     1     |
+| traverse*    |     48.8     | 35.4     |   1      | 16              |        1          |     1     |
+| traverse*    |     30.0     | 57.6     |   1      | 1               |        16         |     1     |
+| traverse*    |     18.4     | 94.0     |   1      | 1               |        32         |     1     |
+| traverse*    |     66.7     | 25.9     |   2      | 16              |        1          |     1     |
+| traverse*    |     79.1     | 21.8     |   2      | 32              |        1          |     1     |
+| traverse*    |     40.5     | 42.6     |   2      | 16              |        2          |     1     |
+| tigerGPU     |     25.2     | 68.5     |   4      | 10              |        1          |     1     |
+| tigerGPU     |     20.2     | 85.6     |   8      | 5               |        1          |     1     |
 
 (6) using gmx_cpu mdrun instead of mdrun_cpu_mpi
 

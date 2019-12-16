@@ -130,17 +130,17 @@ The benchmark data is below:
 | della [3]             |    15.8   | 109.3         |   16     | 1               |        1          |  16         | 0     |
 | della [3]             |    17.1   | 101.2         |   4      | 4               |        1          |  16         | 0     |
 
-(4x) Number of integration steps was increased by factor of 4
-(2x) Number of integration steps was increased by factor of 2
-* -pin on
-[2] haswell node (avx2)
-[3] cascade node (avx512) `#SBATCH --constraint=cascade`
-(pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
-(sckt) Using ntasks-per-socket the task were evenly split over the two sockets
-[fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
-(dbl) double precision version of the code (Intel with MKL)
-(avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
-(188) Version 2018.8
+* (4x) Number of integration steps was increased by factor of 4
+* (2x) Number of integration steps was increased by factor of 2
+* (*) -pin on
+* [2] haswell node (avx2)
+* [3] cascade node (avx512) `#SBATCH --constraint=cascade`
+* (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
+* (sckt) Using ntasks-per-socket the task were evenly split over the two sockets
+* [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
+* (dbl) double precision version of the code (Intel with MKL)
+* (avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
+* (188) Version 2018.8
 
 ## RNASE with cubic box (multi-node)
 
@@ -153,7 +153,7 @@ The benchmark data is below:
 | tigerCpu       |    9.4         | 183.6         |   3      |   8              | 2                 |  48         | 0     |
 | tigerCpu       |   12.8         | 135.3         |   3      |   2              | 8                 |  48         | 0     |
 
-[3] cascade node (avx512)
+* [3] cascade node (avx512)
 
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
 
@@ -190,7 +190,7 @@ Be carefaul with memory requests on all jobs including multi-node jobs.
 | tigerGPU     |     25.2     | 68.5     |   4      | 10              |        1          |     1     |
 | tigerGPU     |     20.2     | 85.6     |   8      | 5               |        1          |     1     |
 
-(6) using gmx_cpu mdrun instead of mdrun_cpu_mpi
+* (6) using gmx_cpu mdrun instead of mdrun_cpu_mpi
 
 Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 

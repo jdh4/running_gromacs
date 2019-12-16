@@ -158,8 +158,6 @@ The benchmark data is below:
 
 Make sure you have a gmx and mdrun_mpi for tigerCpu and one set for tigerGpu.
 
-Be carefaul with memory requests on all jobs including multi-node jobs.
-
 ## ADH with cubic box (single and multi-node)
 
 | cluster      | wall time (s) | ns /day |  nodes   | ntasks-per-node |  cpus-per-task    | GPUs per node |
@@ -216,6 +214,8 @@ BCH=../gpu_bench/rnase_cubic
 gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
 srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
+
+Be carefaul with memory requests on all jobs including multi-node jobs.
 
 ```
 $ seff 27868211

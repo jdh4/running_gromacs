@@ -9,7 +9,7 @@ The code can be built by following these commands:
 ```
 $ ssh <NetID>@tigergpu.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigerGpu.sh>
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigerGpu/tigerGpu.sh>
 # make modifications to tigerGpu.sh if needed
 $ bash tigerGpu.sh | tee build.log
 ```

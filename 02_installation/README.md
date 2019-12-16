@@ -20,8 +20,8 @@ For single-node jobs:
 #!/bin/bash
 #SBATCH --job-name=gmx           # create a short name for your job
 #SBATCH --nodes=1                # node count
-#SBATCH --ntasks=16              # total number of tasks across all nodes
-#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=8        # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --gres=gpu:1             # number of gpus per node
@@ -40,18 +40,18 @@ Slurm environment variables can be seen by adding `env | grep SLURM | sort` to y
 
 ```
 SLURM_CLUSTER_NAME=tiger2
-SLURM_CPUS_ON_NODE=1
-SLURM_CPUS_PER_TASK=1
-SLURMD_NODENAME=tiger-i23g12
+SLURM_CPUS_ON_NODE=8
+SLURM_CPUS_PER_TASK=8
+SLURMD_NODENAME=tiger-i19g3
 SLURM_GTIDS=0
 SLURM_JOB_ACCOUNT=cses
-SLURM_JOB_CPUS_PER_NODE=1
+SLURM_JOB_CPUS_PER_NODE=8
 SLURM_JOB_GID=20121
 SLURM_JOB_GPUS=3
-SLURM_JOB_ID=4121881
-SLURM_JOBID=4121881
+SLURM_JOB_ID=4122593
+SLURM_JOBID=4122593
 SLURM_JOB_NAME=gmx
-SLURM_JOB_NODELIST=tiger-i23g12
+SLURM_JOB_NODELIST=tiger-i19g3
 SLURM_JOB_NUM_NODES=1
 SLURM_JOB_PARTITION=gpu
 SLURM_JOB_QOS=gpu-test
@@ -62,16 +62,16 @@ SLURM_MEM_PER_NODE=4096
 SLURM_NNODES=1
 SLURM_NODE_ALIASES=(null)
 SLURM_NODEID=0
-SLURM_NODELIST=tiger-i23g12
+SLURM_NODELIST=tiger-i19g3
 SLURM_NPROCS=1
 SLURM_NTASKS=1
 SLURM_PROCID=0
 SLURM_SUBMIT_DIR=/home/jdh4/gromacs/gpu
 SLURM_SUBMIT_HOST=tigergpu.princeton.edu
-SLURM_TASK_PID=28512
+SLURM_TASK_PID=21026
 SLURM_TASKS_PER_NODE=1
 SLURM_TOPOLOGY_ADDR_PATTERN=node
-SLURM_TOPOLOGY_ADDR=tiger-i23g12
+SLURM_TOPOLOGY_ADDR=tiger-i19g3
 SLURM_WORKING_CLUSTER=tiger2:tiger2-slurm:6820:8704:101
 ```
 

@@ -156,6 +156,10 @@ libnuma.so.1 => /lib64/libnuma.so.1 (0x00002adc7cc65000)
 libltdl.so.7 => /lib64/libltdl.so.7 (0x00002adc7ce70000)
 ```
 
+Where to store your files:
+
+![tigress](https://tigress-web.princeton.edu/~jdh4/hpc_princeton_filesystems.png)
+
 ## Traverse
 
 ```
@@ -209,14 +213,7 @@ gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -pin on -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
-Note that `rh/devtoolset/8` cannot be used to compile Gromacs.
-
-3. use srun in favor of mpirun -np 16
-
-Questions:
-
-1. Thread MPI vs MPI for a single node
-x. be sure to set `-ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK`
+Note that `rh/devtoolset/8` cannot be used to compile Gromacs on Traverse. The IBM xlc/C compilers are not supported by Gromacs 2019.
 
 ## Della
 

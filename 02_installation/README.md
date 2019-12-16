@@ -162,6 +162,11 @@ Where to store your files:
 
 ## Traverse
 
+Traverse is composed of 46 IBM POWER9 nodes with 4 NVIDIA V100 GPUs per node.
+
+![smt-core](http://3s81si1s5ygj3mzby34dq6qf-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/ibm-hot-chips-power9-smt4-core.jpg)
+
+
 ```
 $ ssh <NetID>@traverse.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software

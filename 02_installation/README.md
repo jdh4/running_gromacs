@@ -480,7 +480,7 @@ srun mdrun_cpu_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 
 ## Adroit (GPU)
 
-Gromacs can be built for GPU use on Adroit by running the following commands:
+Gromacs can be built for GPU use on Adroit. Because it has four V100 GPUs, one can run comparison tests against Traverse. Gromacs can be built by running the following commands:
 
 ```bash
 $ ssh <NetID>@adroit.princeton.edu
@@ -490,7 +490,7 @@ $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_in
 $ bash adroit.sh | tee build.log
 ```
 
-For single-node jobs:
+Below is a sample Slurm script for single-node jobs:
 
 ```
 #!/bin/bash

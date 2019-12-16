@@ -38,7 +38,7 @@ gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 
 The shared library dependencies of `gmx`:
 
-```bash
+```
 $ ldd gmx
 linux-vdso.so.1 =>  (0x00007ffc2cbfe000)
 libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002abff6918000)
@@ -89,7 +89,7 @@ srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 
 The shared library dependencies of `mdrun_mpi` are:
 
-```bash
+```
 $ ldd mdrun_mpi
 linux-vdso.so.1 =>  (0x00007fff8e143000)
 libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002adc6a709000)

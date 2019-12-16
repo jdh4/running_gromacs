@@ -2,8 +2,8 @@
 
 GPU benchmark input files from [this page](http://www.gromacs.org/GPU_acceleration):
 
-1. RNASE (24k atoms of 7336 SPC water, 128 protein residues, 6 ion residues at 300 K)
-2. ADH (134k atoms at 300 K)
+1. RNASE (24k atoms of 7336 SPC water, 128 protein residues, 6 ion residues at 300 K, PME, cubic box)
+2. ADH (134k atoms of 37611 water, 1408 protein residues, 16 ion residues at 300 K, PME, cubic box)
 
 ```
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/rnase_bench_systems.tar.gz
@@ -18,11 +18,34 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
 
-Here we use cubic for larger systems should use octa. Using h-bonds instead of all-bonds constraints.
+
 
 ## RNASE with cubic box (single node)
 
-| cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs  |
+The Slurm script is below:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gmx           # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=8        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
+#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
+#SBATCH --gres=gpu:1             # number of gpus per node
+
+module purge
+module load intel/19.0/64/19.0.1.144
+module load cudatoolkit/10.2
+
+BCH=../rnase_cubic
+gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
+
+The benchmark data is below:
+
+| cluster               | wall time (s)  | ns/day   |  ntasks  |  cpus-per-task  |  threads-per-core | total cores |  GPUs |
 |:----------------------|----------:|--------------:|:--------:|:---------------:|:-----------------:|:-----------:|:-----:|
 | adroit (v100)         |    10.5   | 163.9         |   1      | 1               |        1          |   1         | 1     |
 | adroit (v100)         |    18.6   |  93.1         |   2      | 1               |        1          |   2         | 1     |
@@ -75,7 +98,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu (avx2)       |    17.9   | 96.3          |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu (188)        |    15.9   | 108.5         |   16     | 1               |        1          |  16         | 0     |
 | tigerCpu              |     9.6   | 179.8         |   32     | 1               |        1          |  32         | 0     |
-| tigerCpu (n)          |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
+| tigerCpu (sckt)       |     9.6   | 179.5         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu (2x)         |    19.0   | 181.8         |   32     | 1               |        1          |  32         | 0     |
 | tigerCpu              |    30.1   |  57.4         |   2      | 4               |        1          |  8          | 0     |
 | tigerCpu              |    28.7   |  60.2         |   4      | 2               |        1          |  8          | 0     |
@@ -85,7 +108,7 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerCpu              |    10.4   | 166.6         |   1      | 32              |        1          |  32         | 0     |
 | tigerCpu              |    14.9   | 116.2         |   4      | 8               |        1          |  32         | 0     |
 | tigerCpu              |    15.4   | 112.0         |   8      | 4               |        1          |  32         | 0     |
-| tigerCpu (n)          |    14.9   | 116.4         |   8      | 4               |        1          |  32         | 0     |
+| tigerCpu (sckt)       |    14.9   | 116.4         |   8      | 4               |        1          |  32         | 0     |
 | perseus               |   186.8   |  9.3          |   1      | 1               |        1          |  1          | 0     |
 | perseus               |   119.6   | 14.4          |   2      | 1               |        1          |  2          | 0     |
 | perseus               |    63.3   | 27.3          |   4      | 1               |        1          |  4          | 0     |
@@ -113,11 +136,12 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 [2] haswell node (avx2)
 [3] cascade node (avx512) `#SBATCH --constraint=cascade`
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
-(n) 16 ntasks-per-node
+(sckt) 16 ntasks-per-node
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
 (dbl) double precision version of the code (Intel with MKL)
 (avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
 (188) Version 2018.8
+(4x) Number of integration steps was increased by factor of 4
 
 ## RNASE with cubic box (multi-node)
 

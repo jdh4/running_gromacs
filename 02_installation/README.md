@@ -164,7 +164,7 @@ Where to store your files:
 
 ## Traverse
 
-Traverse is composed of 46 IBM POWER9 nodes with 4 NVIDIA V100 GPUs per node.
+Traverse is composed of 46 IBM POWER9 nodes with 4 NVIDIA V100 GPUs per node. Each node has two sockets each with a 16-core CPU. Each of the 16 cores has 4 hardware threads. Hence each node has 128 logical cpu-cores or hardware threads.
 
 ![smt-core](http://3s81si1s5ygj3mzby34dq6qf-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/ibm-hot-chips-power9-smt4-core.jpg)
 

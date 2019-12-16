@@ -271,6 +271,9 @@ gmx mdrun -pin on -ntomp 16 -s bench.tpr -c conf.gro
 #srun -n 1 gmx mdrun -ntomp $SLURM_NTASKS -v -pin on -s bench.tpr
 #srun -n 1 --cpu-bind=verbose,none --mem-bind=verbose,local gmx mdrun -v -pin on -s bench.tpr
 #gmx mdrun -pin on -gputasks 01 -nb gpu -pme gpu -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+
+hostname
+nvidia-smi --query-gpu=index,pci.bus_id,name --format=csv,noheader
 ```
 
 

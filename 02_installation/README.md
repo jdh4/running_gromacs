@@ -36,6 +36,34 @@ gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
+The shared library dependencies of `gmx`:
+
+```bash
+$ ldd gmx
+linux-vdso.so.1 =>  (0x00007ffc2cbfe000)
+	libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002abff6918000)
+	libmkl_sequential.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_sequential.so (0x00002abff7466000)
+	libmkl_core.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_core.so (0x00002abff8a12000)
+	libgromacs_gpu.so.4 => /home/jdh4/.local/bin/./../lib64/libgromacs_gpu.so.4 (0x00002abffcb9e000)
+	libm.so.6 => /lib64/libm.so.6 (0x00002abffe3a8000)
+	libstdc++.so.6 => /lib64/libstdc++.so.6 (0x00002abffe6aa000)
+	libiomp5.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libiomp5.so (0x00002abffe9b2000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002abffed9a000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x00002abffefb0000)
+	libc.so.6 => /lib64/libc.so.6 (0x00002abfff1cc000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00002abfff59a000)
+	librt.so.1 => /lib64/librt.so.1 (0x00002abfff79e000)
+	libcufft.so.10 => /usr/local/cuda-10.2/lib64/libcufft.so.10 (0x00002abfff9a6000)
+	libhwloc.so.5 => /lib64/libhwloc.so.5 (0x00002ac008e46000)
+	libimf.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libimf.so (0x00002ac009083000)
+	libsvml.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libsvml.so (0x00002ac009623000)
+	libirng.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libirng.so (0x00002ac00afc6000)
+	libintlc.so.5 => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libintlc.so.5 (0x00002ac00b338000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002abff66f4000)
+	libnuma.so.1 => /lib64/libnuma.so.1 (0x00002ac00b5aa000)
+	libltdl.so.7 => /lib64/libltdl.so.7 (0x00002ac00b7b5000)
+```
+
 For multi-node MPI jobs:
 
 ```bash
@@ -58,6 +86,33 @@ module load intel-mpi/intel/2019.5/64
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
+
+The shared library dependencies of `mdrun_mpi` are:
+
+```bash
+$ ldd mdrun_mpi
+	linux-vdso.so.1 =>  (0x00007fff8e143000)
+	libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002adc6a709000)
+	libmkl_sequential.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_sequential.so (0x00002adc6b257000)
+	libmkl_core.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_core.so (0x00002adc6c803000)
+	libmpifort.so.12 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/lib/libmpifort.so.12 (0x00002adc7098f000)
+	libmpi.so.12 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/lib/release/libmpi.so.12 (0x00002adc70d4d000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00002adc71d52000)
+	librt.so.1 => /lib64/librt.so.1 (0x00002adc71f56000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x00002adc7215e000)
+	libcufft.so.10 => /usr/local/cuda-10.2/lib64/libcufft.so.10 (0x00002adc7237a000)
+	libhwloc.so.5 => /lib64/libhwloc.so.5 (0x00002adc7b81a000)
+	libm.so.6 => /lib64/libm.so.6 (0x00002adc7ba57000)
+	libstdc++.so.6 => /lib64/libstdc++.so.6 (0x00002adc7bd59000)
+	libiomp5.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libiomp5.so (0x00002adc7c061000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002adc7c449000)
+	libc.so.6 => /lib64/libc.so.6 (0x00002adc7c65f000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002adc6a4e5000)
+	libfabric.so.1 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/libfabric/lib/libfabric.so.1 (0x00002adc7ca2d000)
+	libnuma.so.1 => /lib64/libnuma.so.1 (0x00002adc7cc65000)
+	libltdl.so.7 => /lib64/libltdl.so.7 (0x00002adc7ce70000)
+```
+
 
 ## Traverse
 

@@ -340,7 +340,6 @@ make[1]: *** [CMakeFiles/Makefile2:2311: share/template/CMakeFiles/template.dir/
 make: *** [Makefile:163: all] Error 2
 ```
 
-
 ## Della
 
 Della is good for single node jobs. You should not be running small jobs on Tiger.
@@ -348,7 +347,7 @@ Della is good for single node jobs. You should not be running small jobs on Tige
 ```bash
 $ ssh <NetID>@della.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della.sh>
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della/della.sh>
 # make modifications to della.sh if needed
 $ bash della.sh | tee build.log
 ```
@@ -412,7 +411,7 @@ Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used fo
 ```bash
 $ ssh <NetID>@tigergpu.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/perseus.sh>
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/perseus/perseus.sh>
 # make modifications to perseus.sh if needed
 $ bash perseus.sh | tee build.log
 ```
@@ -432,9 +431,9 @@ If you have an account on Tiger then consider building only a GPU version:
 ```
 $ ssh <NetID>@tigercpu.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigercpu.sh>
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigerCpu/tigerCpu.sh>
 # make modifications to tigercpu.sh if needed
-$ bash tigercpu.sh | tee build.log
+$ bash tigerCpu.sh | tee build.log
 ```
 
 For single-node jobs:
@@ -485,7 +484,7 @@ Gromacs can be built for GPU use on Adroit. Because it has four V100 GPUs, one c
 ```bash
 $ ssh <NetID>@adroit.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/adroit.sh>
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/adroit/adroit.sh>
 # make modifications to adroit.sh if needed
 $ bash adroit.sh | tee build.log
 ```

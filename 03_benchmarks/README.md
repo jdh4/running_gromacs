@@ -161,6 +161,7 @@ Be carefaul with memory requests on all jobs including multi-node jobs.
 | traverse*    |     66.7     | 25.9     |   2      | 16              |        1          |     1     |
 | traverse*    |     79.1     | 21.8     |   2      | 32              |        1          |     1     |
 | traverse*    |     40.5     | 42.6     |   2      | 16              |        2          |     1     |
+| tigerGPU     |     32.4     | 53.3     |   2      | 10              |        1          |     1     |
 | tigerGPU     |     25.2     | 68.5     |   4      | 10              |        1          |     1     |
 | tigerGPU     |     20.2     | 85.6     |   8      | 5               |        1          |     1     |
 

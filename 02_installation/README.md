@@ -8,7 +8,7 @@ The code can be built by following these commands:
 
 ```
 $ ssh <NetID>@tigergpu.princeton.edu
-$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/tigerGpu.sh>
 # make modifications to tigerGpu.sh if needed
 $ bash tigerGpu.sh | tee build.log
@@ -171,7 +171,7 @@ Traverse is composed of 46 IBM POWER9 nodes with 4 NVIDIA V100 GPUs per node.
 
 ```
 $ ssh <NetID>@traverse.princeton.edu
-$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/traverse.sh>
 # make modifications to traverse.sh if needed
 $ bash traverse.sh | tee build.log
@@ -346,7 +346,7 @@ Della is good for single node jobs. You should not be running small jobs on Tige
 
 ```bash
 $ ssh <NetID>@della.princeton.edu
-$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della/della.sh>
 # make modifications to della.sh if needed
 $ bash della.sh | tee build.log
@@ -410,7 +410,7 @@ Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used fo
 
 ```bash
 $ ssh <NetID>@tigergpu.princeton.edu
-$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/perseus/perseus.sh>
 # make modifications to perseus.sh if needed
 $ bash perseus.sh | tee build.log
@@ -483,7 +483,7 @@ Gromacs can be built for GPU use on Adroit. Because it has four V100 GPUs, one c
 
 ```bash
 $ ssh <NetID>@adroit.princeton.edu
-$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/adroit/adroit.sh>
 # make modifications to adroit.sh if needed
 $ bash adroit.sh | tee build.log

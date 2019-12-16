@@ -136,8 +136,9 @@ The benchmark data is below:
 * [2] haswell node (avx2)
 * [3] cascade node (avx512) `#SBATCH --constraint=cascade`
 * (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
-* (sckt) Using ntasks-per-socket the task were evenly split over the two sockets
-* [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
+* (sckt) Using `ntasks-per-socket` the tasks were evenly split over the two sockets
+* (fft) Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
+* (gcc) Code built with GCC insteal of Intel compiler (mkl was used for FFT's)
 * (dbl) double precision version of the code (Intel with MKL)
 * (avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
 * (188) Version 2018.8

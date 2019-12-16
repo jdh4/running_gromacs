@@ -201,8 +201,8 @@ For single-node jobs:
 #!/bin/bash
 #SBATCH --job-name=gmx           # create a short name for your job
 #SBATCH --nodes=1                # node count
-#SBATCH --ntasks=16              # total number of tasks across all nodes
-#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --ntasks=1               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=16       # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
 #SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
@@ -217,6 +217,60 @@ module load cudatoolkit/10.2
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -pin on -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
+
+The above Slurm leads to poor performance but the below script seems to work:
+
+```
+#!/bin/bash
+#SBATCH --job-name=rnase         # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=64               # total number of tasks across all nodes
+# SBATCH --ntasks-per-node=16               # total number of tasks across all nodes
+#SBATCH --ntasks-per-socket=64               # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1       # cpu-cores per task (>1 if multi-threaded tasks)
+# SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
+# SBATCH --cores-per-socket=16     # setting to 1 turns off SMT (max value is 4)
+#SBATCH --mem=4G                 # memory per cpu-core (4G is default)
+#SBATCH --gres=gpu:1             # number of gpus per node
+#SBATCH --gpu-bind=closest
+# SBATCH --cpu-bind=verbose,cores
+# SBATCH --gres-flags=enforce-binding
+#SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
+# SBATCH --nodelist=traverse-k01g7
+# SBATCH --exclude=traverse-k01g4
+
+hostname
+echo $$
+date
+env | grep SLURM | sort
+#export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+#export OMP_NUM_THREADS=$SLURM_NTASKS
+#export OMP_PLACES=cores
+#export OMP_PROC_BIND=TRUE
+#export OMP_CPU_AFFINITY=0
+export GMX_MAXBACKUP=-1
+
+module purge
+#module load openmpi/devtoolset-8/4.0.1/64
+module load cudatoolkit/10.2
+
+BCH=../gpu_bench/rnase_cubic
+#srun gmx_188 grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+#srun mdrun_188 -pin on -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
+date
+numactl -s
+taskset -p $$
+date
+
+gmx mdrun -pin on -ntomp 16 -s bench.tpr -c conf.gro
+#gmx mdrun -pin on -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+#gmx mdrun -pin on -ntomp $SLURM_NTASKS -s bench.tpr -c conf.gro
+#srun -n 1 gmx mdrun -ntomp $SLURM_NTASKS -v -pin on -s bench.tpr
+#srun -n 1 --cpu-bind=verbose,none --mem-bind=verbose,local gmx mdrun -v -pin on -s bench.tpr
+#gmx mdrun -pin on -gputasks 01 -nb gpu -pme gpu -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
+```
+
 
 Note that `rh/devtoolset/8` cannot be used to compile Gromacs on Traverse. The IBM xlc/C compilers are not supported by Gromacs 2019.
 

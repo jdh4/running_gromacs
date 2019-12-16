@@ -197,6 +197,13 @@ Expected: (n.memory) > (0), actual: 0 vs 0
  1 FAILED TEST
 ```
 
+In the Gromacs output one will see:
+
+```
+NOTE: Affinity setting for 10/16 threads failed.
+NOTE: Thread affinity was not set.
+```
+
 For single-node jobs:
 
 ```bash

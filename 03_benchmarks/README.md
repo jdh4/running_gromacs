@@ -37,8 +37,9 @@ Here we use cubic for larger systems should use octa. Using h-bonds instead of a
 | tigerGpu              |     8.0   | 216.6         |   1      | 2               |        1          |   2         | 1     |
 | tigerGpu              |     6.0   | 288.8         |   1      | 4               |        1          |   4         | 1     |
 | tigerGpu              |     5.2   | 333.9         |   1      | 8               |        1          |   8         | 1     |
+| tigerGpu (4x)         |    20.3   | 340.3         |   1      | 8               |        1          |   8         | 1     |
 | tigerGpu              |     5.3   | 325.1         |   1      |16               |        1          |  16         | 1     |
-| tigerGpu              |    12.4   | 139.2         |   1      | 1               |        1          |   1         | 2     |
+| tigerGpu              |    11.3   | 153.4         |   1      | 1               |        1          |   1         | 2     |
 | tigerGpu              |     5.2   | 331.8         |   1      | 16              |        1          |   1         | 2     |
 | tigerGpu              |     5.1   | 338.5         |   1      | 28              |        1          |   28        | 4     |
 | traverse              |    16.9   | 102.0         |   1      | 1               |        1          |   1 (4)     | 1     |

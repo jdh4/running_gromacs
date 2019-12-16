@@ -220,6 +220,36 @@ gmx mdrun -pin on -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 
 Note that `rh/devtoolset/8` cannot be used to compile Gromacs on Traverse. The IBM xlc/C compilers are not supported by Gromacs 2019.
 
+The shared library dependencies of `gmx` are:
+
+```
+$ ldd gmx
+linux-vdso64.so.1 =>  (0x0000200000050000)
+libgromacs.so.4 => /home/jdh4/.local/bin/./../lib64/libgromacs.so.4 (0x0000200000070000)
+libstdc++.so.6 => /lib64/libstdc++.so.6 (0x0000200001710000)
+libm.so.6 => /lib64/libm.so.6 (0x00002000018a0000)
+libgomp.so.1 => /lib64/libgomp.so.1 (0x0000200001990000)
+libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002000019f0000)
+libpthread.so.0 => /lib64/libpthread.so.0 (0x0000200001a30000)
+libc.so.6 => /lib64/libc.so.6 (0x0000200001a70000)
+libdl.so.2 => /lib64/libdl.so.2 (0x0000200001c60000)
+librt.so.1 => /lib64/librt.so.1 (0x0000200001c90000)
+libcufft.so.10 => /usr/local/cuda-10.1/targets/ppc64le-linux/lib/libcufft.so.10 (0x0000200001cc0000)
+libhwloc.so.5 => /lib64/libhwloc.so.5 (0x000020000a050000)
+libopenblas.so.0 => /lib64/libopenblas.so.0 (0x000020000a0c0000)
+/lib64/ld64.so.2 (0x0000200000000000)
+libnuma.so.1 => /lib64/libnuma.so.1 (0x000020000acf0000)
+libltdl.so.7 => /lib64/libltdl.so.7 (0x000020000ad20000)
+libgfortran.so.3 => /lib64/libgfortran.so.3 (0x000020000ad50000)
+```
+
+ESSL cannot be used:
+
+```
+-DGMX_EXTERNAL_BLAS=ON -DGMX_BLAS_USER=/usr/lib64/libessl.so \
+-DGMX_EXTERNAL_LAPACK=ON -DGMX_LAPACK_USER=/usr/lib64/libessl.so \
+```
+
 ## Della
 
 Della is good for single node jobs. You should not be running small jobs on Tiger.

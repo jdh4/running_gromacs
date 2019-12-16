@@ -15,6 +15,10 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
 
+There are:   128    Protein residues
+There are:  7336      Water residues
+There are:     6        Ion residues
+
 Here we use cubic for larger systems should use octa. Using h-bonds instead of all-bonds constraints.
 
 ## RNASE with cubic box (single node)

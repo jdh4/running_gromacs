@@ -36,6 +36,45 @@ gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
+Slurm environment variables can be seen by adding `env | grep SLURM | sort` to your Slurm script:
+
+```
+SLURM_CLUSTER_NAME=tiger2
+SLURM_CPUS_ON_NODE=1
+SLURM_CPUS_PER_TASK=1
+SLURMD_NODENAME=tiger-i23g12
+SLURM_GTIDS=0
+SLURM_JOB_ACCOUNT=cses
+SLURM_JOB_CPUS_PER_NODE=1
+SLURM_JOB_GID=20121
+SLURM_JOB_GPUS=3
+SLURM_JOB_ID=4121881
+SLURM_JOBID=4121881
+SLURM_JOB_NAME=gmx
+SLURM_JOB_NODELIST=tiger-i23g12
+SLURM_JOB_NUM_NODES=1
+SLURM_JOB_PARTITION=gpu
+SLURM_JOB_QOS=gpu-test
+SLURM_JOB_UID=150340
+SLURM_JOB_USER=jdh4
+SLURM_LOCALID=0
+SLURM_MEM_PER_NODE=4096
+SLURM_NNODES=1
+SLURM_NODE_ALIASES=(null)
+SLURM_NODEID=0
+SLURM_NODELIST=tiger-i23g12
+SLURM_NPROCS=1
+SLURM_NTASKS=1
+SLURM_PROCID=0
+SLURM_SUBMIT_DIR=/home/jdh4/gromacs/gpu
+SLURM_SUBMIT_HOST=tigergpu.princeton.edu
+SLURM_TASK_PID=28512
+SLURM_TASKS_PER_NODE=1
+SLURM_TOPOLOGY_ADDR_PATTERN=node
+SLURM_TOPOLOGY_ADDR=tiger-i23g12
+SLURM_WORKING_CLUSTER=tiger2:tiger2-slurm:6820:8704:101
+```
+
 The shared library dependencies of `gmx`:
 
 ```
@@ -64,6 +103,8 @@ libnuma.so.1 => /lib64/libnuma.so.1 (0x00002ac00b5aa000)
 libltdl.so.7 => /lib64/libltdl.so.7 (0x00002ac00b7b5000)
 ```
 
+Note that Gromacs only uses serial FFT routines so you will not benefit from a multithreaded or MPI FFT library.
+
 For multi-node MPI jobs:
 
 ```bash
@@ -86,6 +127,8 @@ module load intel-mpi/intel/2019.5/64
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
+
+Our clusters are configured to use `srun`. Please do not use `mpirun`.
 
 The shared library dependencies of `mdrun_mpi` are:
 
@@ -113,18 +156,61 @@ libnuma.so.1 => /lib64/libnuma.so.1 (0x00002adc7cc65000)
 libltdl.so.7 => /lib64/libltdl.so.7 (0x00002adc7ce70000)
 ```
 
-
 ## Traverse
+
+```
+$ ssh <NetID>@traverse.princeton.edu
+$ cd </path/to/software/directory>  # e.g., cd ~/software
+$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/traverse.sh>
+# make modifications to traverse.sh if needed
+$ bash traverse.sh | tee build.log
+```
+
+Traverse will build successfully but it fails a test:
+
+```
+[ RUN      ] HardwareTopologyTest.NumaCacheSelfconsistency
+/home/jdh4/sw/gromacs-2019.4/src/gromacs/hardware/tests/hardwaretopology.cpp:179: Failure
+Expected: (n.memory) > (0), actual: 0 vs 0
+/home/jdh4/sw/gromacs-2019.4/src/gromacs/hardware/tests/hardwaretopology.cpp:179: Failure
+Expected: (n.memory) > (0), actual: 0 vs 0
+[  FAILED  ] HardwareTopologyTest.NumaCacheSelfconsistency (126 ms)
+[----------] 4 tests from HardwareTopologyTest (599 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test cases ran. (603 ms total)
+[  PASSED  ] 4 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] HardwareTopologyTest.NumaCacheSelfconsistency
+
+ 1 FAILED TEST
+```
+
+For single-node jobs:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gmx           # create a short name for your job
+#SBATCH --nodes=1                # node count
+#SBATCH --ntasks=16              # total number of tasks across all nodes
+#SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
+#SBATCH --threads-per-core=1     # setting to 1 turns off SMT (max value is 4)
+#SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
+#SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
+#SBATCH --gres=gpu:1             # number of gpus per node
+#SBATCH --gpu-bind=closest       # use the closest gpu
+#SBATCH --mail-type=all          # send email when job begins, ends and fails
+#SBATCH --mail-user=<YourNetID>@princeton.edu
+
+module purge
+module load cudatoolkit/10.2
+
+gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
+gmx mdrun -pin on -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
 
 Note that `rh/devtoolset/8` cannot be used to compile Gromacs.
 
-
-
-Notes:
-
-1. Reference Slurm variables instead of introducing duplication: `SLURM_CPUS_PER_TASK`, `SLURM_NTASKS`, `SLURM_NODES`
-see `env | grep SLURM | sort`
-2. Gromacs only uses serial FFT's so one does not need an MPI-enabled FFT module
 3. use srun in favor of mpirun -np 16
 
 Questions:

@@ -3,7 +3,7 @@
 GPU benchmark input files from [this page](http://www.gromacs.org/GPU_acceleration):
 
 1. RNASE (24k atoms of 7336 SPC water, 128 protein residues, 6 ion residues at 300 K, PME, cubic box)
-2. ADH (134k atoms of 37611 water, 1408 protein residues, 16 ion residues at 300 K, PME, cubic box)
+2. ADH (134k atoms of 37611 TIP3P water, 1408 protein residues, 16 ion residues at 300 K, PME, cubic box)
 
 ```
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/rnase_bench_systems.tar.gz
@@ -17,8 +17,6 @@ drwxr-xr-x. 2 jdh4 cses     116 Dec  8 11:37 rnase_dodec_vsites
 
 $ wget ftp://ftp.gromacs.org/pub/benchmarks/ADH_bench_systems.tar.gz
 ```
-
-
 
 ## RNASE with cubic box (single node)
 
@@ -117,7 +115,7 @@ The benchmark data is below:
 | perseus               |    33.4   | 51.8          |   2      | 4               |        1          |  8          | 0     |
 | perseus               |    30.6   | 56.5          |   1      | 8               |        1          |  8          | 0     |
 | perseus               |    30.5   | 56.6          |   1      | 8               |        1          |  8          | 0     |
-| perseus [2x]          |    61.2   | 56.5          |   1      | 8               |        1          |  8          | 0     |
+| perseus (2x)          |    61.2   | 56.5          |   1      | 8               |        1          |  8          | 0     |
 | perseus               |    18.4   | 93.7          |   16     | 1               |        1          |  16         | 0     |
 | perseus               |    21.1   | 81.9          |   4      | 4               |        1          |  16         | 0     |
 | perseus (pme)         |    18.3   | 93.7          |   4      | 4               |        1          |  16         | 0     |
@@ -132,16 +130,17 @@ The benchmark data is below:
 | della [3]             |    15.8   | 109.3         |   16     | 1               |        1          |  16         | 0     |
 | della [3]             |    17.1   | 101.2         |   4      | 4               |        1          |  16         | 0     |
 
+(4x) Number of integration steps was increased by factor of 4
+(2x) Number of integration steps was increased by factor of 2
 * -pin on
 [2] haswell node (avx2)
 [3] cascade node (avx512) `#SBATCH --constraint=cascade`
 (pme) `gmx mdrun -npme 1 -ntomp_pme 4 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr`
-(sckt) 16 ntasks-per-node
+(sckt) Using ntasks-per-socket the task were evenly split over the two sockets
 [fft] Replaced `-DGMX_FFT_LIBRARY=mkl` with `-DGMX_BUILD_OWN_FFTW=ON`
 (dbl) double precision version of the code (Intel with MKL)
 (avx2) -DGMX_SIMD=AVX2_256 and OPTFLAGS="-Ofast -xCORE-AVX2 -DNDEBUG"
 (188) Version 2018.8
-(4x) Number of integration steps was increased by factor of 4
 
 ## RNASE with cubic box (multi-node)
 
@@ -153,7 +152,6 @@ The benchmark data is below:
 | tigerCpu       |    8.8         | 197.1         |   3      |   16             | 1                 |  48         | 0     |
 | tigerCpu       |    9.4         | 183.6         |   3      |   8              | 2                 |  48         | 0     |
 | tigerCpu       |   12.8         | 135.3         |   3      |   2              | 8                 |  48         | 0     |
-
 
 [3] cascade node (avx512)
 
@@ -206,7 +204,6 @@ Below is the Slurm script for 1 core and 1 GPU on TigerGPU:
 #SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --time=00:10:00          # total run time limit (HH:MM:SS)
 
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export GMX_MAXBACKUP=-1
 
 module purge
@@ -216,7 +213,7 @@ module load cudatoolkit/10.2
 
 BCH=../gpu_bench/rnase_cubic
 gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
-gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 ```

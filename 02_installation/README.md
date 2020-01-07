@@ -272,6 +272,11 @@ numactl -s
 taskset -p $$
 date
 
+#--gres-flags=enforce-binding
+#--gres=gpu:1
+export OMP_DISPLAY_ENV=TRUE
+export OMP_PLACES="{11,111}"
+
 gmx mdrun -pin on -ntomp 16 -s bench.tpr -c conf.gro
 #gmx mdrun -pin on -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr -c conf.gro
 #gmx mdrun -pin on -ntomp $SLURM_NTASKS -s bench.tpr -c conf.gro

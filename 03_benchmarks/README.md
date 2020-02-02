@@ -232,6 +232,44 @@ Memory Utilized: 1.56 MB
 Memory Efficiency: 0.04% of 4.00 GB
 ```
 
+```
+gmx_gpu mdrun -gputasks 0001 -nb gpu -pme gpu -npme 1 -ntmpi 4 -ntomp 2 -s bench.tpr
+
+Reading file bench.tpr, VERSION 2019.4 (single precision)
+Non-default thread affinity set, disabling internal thread affinity
+Changing nstlist from 10 to 80, rlist from 0.9 to 1.038
+
+
+Using 4 MPI threads
+Using 2 OpenMP threads per tMPI thread
+
+On host tiger-i22g10 2 GPUs selected for this run.
+Mapping of GPU IDs to the 4 GPU tasks in the 4 ranks on this node:
+  PP:0,PP:0,PP:0,PME:1
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PME tasks will do all aspects on the GPU
+
+=============
+
+gmx_gpu mdrun -gputasks 0011 -nb gpu -pme gpu -npme 1 -ntmpi 4 -ntomp 1 -s bench.tpr
+
+Reading file bench.tpr, VERSION 2019.4 (single precision)
+Non-default thread affinity set, disabling internal thread affinity
+Changing nstlist from 10 to 80, rlist from 0.9 to 1.038
+
+
+Using 4 MPI threads
+Using 1 OpenMP thread per tMPI thread
+
+On host tiger-i22g15 2 GPUs selected for this run.
+Mapping of GPU IDs to the 4 GPU tasks in the 4 ranks on this node:
+  PP:0,PP:0,PP:1,PME:1
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PME tasks will do all aspects on the GPU
+gmx_gpu mdrun -gputasks 0011 -nb gpu -pme gpu -npme 1 -ntmpi 4 -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+```
+
+
 The contents of `md.log` is shown below for 1 core and 1 GPU on TigerGPU:
 
 ```

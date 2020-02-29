@@ -15,7 +15,7 @@ module load intel/19.0/64/19.0.1.144
 module load cudatoolkit/10.2
 module load rh/devtoolset/7
 
-OPTFLAGS="-Ofast -xCORE-AVX2 -mtune=broadwell -DNDEBUG"
+OPTFLAGS="-Ofast -march=core-avx2 -mtune=broadwell -DNDEBUG"
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=icc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \

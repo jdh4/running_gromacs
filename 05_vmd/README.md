@@ -31,6 +31,12 @@ $ vglrun /home/<YourNetID>/software/vmd/bin/vmd
 # you coud add the above to your PATH in .bashrc
 ```
 
+Note the `vglrun` is not necessary but on Tigressdata it allows for OpenGL rendering on the GPU. On cluster head nodes it should be omitted.
+
+### Updating your PATH
+
+Add VMD to your PATH environment variable:
+
 ```
 $ vim ~/.bashrc  # or another text editor
 ```
@@ -38,11 +44,11 @@ $ vim ~/.bashrc  # or another text editor
 Then add this line:
 
 ```
-export PATH=$PATH:</path/to/vmd>
+export PATH=$PATH:</path/to/vmd>  # e.g., export PATH=$PATH:/home/<YourNetID>/software/vmd/bin
 ```
 
 If you run VMD on a machine other than tigressdata then you should omit vglrun:
 
 ```
-$ $HOME/software/vmd/bin/vmd
+$ vmd <myfile.gro>
 ```

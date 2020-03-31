@@ -29,6 +29,12 @@ $install_library_dir="/home/jdh4/software/vmd/lib/$install_name";
 cd src
 make install
 # launch VMD with something like the next line
-$HOME/software/vmd/bin/vmd
+vglrun $HOME/software/vmd/bin/vmd
 # you coud add the above to your PATH in .bashrc
+```
+
+If you run VMD on a machine other than tigressdata then you should omit vglrun:
+
+```
+$ $HOME/software/vmd/bin/vmd
 ```

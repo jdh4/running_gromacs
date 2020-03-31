@@ -12,6 +12,7 @@ If you decide to rely on X11 forwarding then make sure you are aware of [this pa
 
 I found the following procedure to work for installing VMD on tigressdata:
 
+```
 ssh -X tigressdata.princeton.edu
 cd software  # or another directory
 wget https://www.ks.uiuc.edu/Research/vmd/vmd-1.9.4/files/alpha/vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
@@ -26,3 +27,4 @@ make install
 # launch VMD with something like the next line
 $HOME/software/vmd/bin/vmd
 # you coud add the above to your PATH in .bashrc
+```

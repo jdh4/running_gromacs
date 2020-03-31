@@ -1,16 +1,20 @@
 # VMD on the HPC Clusters
 
-For intensive visualization work you can install [VMD](https://www.ks.uiuc.edu/Research/vmd/) in your account on tigressdata. The `/scratch/gpfs` filesystems are
-accessible from tigressdata. For example, for Perseus use the path: `/perseus/scratch/gpfs/<YourNetID>`.
+For intensive visualization work you can install [VMD](https://www.ks.uiuc.edu/Research/vmd/) in your `/home` directory on tigressdata. The `/scratch/gpfs` and `/tigress` filesystems are
+accessible from tigressdata. For example, for Perseus use the path: `/perseus/scratch/gpfs/<YourNetID>`. This allows you to easily work with files on the different clusters.
 
 For just doing quick checks of system configurations you can also install it in your `/home` directory on one of the
 clusters (e.g., tiger).
+
+## Working with Graphics
 
 It is recommended that you should install [TurboVNC](https://researchcomputing.princeton.edu/turbovnc) to work with VMD.
 
 If you decide to rely on X11 forwarding then make sure you are aware of [this page](https://researchcomputing.princeton.edu/sshX).
 
-I found the following procedure to work for installing VMD on tigressdata:
+## Installing VMD on Tigressdata
+
+The following procedure to work for installing VMD on tigressdata:
 
 ```
 ssh -X tigressdata.princeton.edu

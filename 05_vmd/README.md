@@ -15,20 +15,30 @@ It is recommended that you install [TurboVNC](https://researchcomputing.princeto
 The following procedure to work for installing VMD on tigressdata:
 
 ```
-ssh -X tigressdata.princeton.edu
-cd software  # or another directory
-wget https://www.ks.uiuc.edu/Research/vmd/vmd-1.9.4/files/alpha/vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
-tar zxvf vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
-cd vmd-1.9.4a38
+$ ssh <YourNetID>@tigressdata.princeton.edu
+$ cd software  # or another directory
+$ wget https://www.ks.uiuc.edu/Research/vmd/vmd-1.9.4/files/alpha/vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
+$ tar zxvf vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
+$ cd vmd-1.9.4a38
 # read the README file for the quick install directions then
 # modify the configure file with something like
-$install_bin_dir="/home/jdh4/software/vmd/bin";
-$install_library_dir="/home/jdh4/software/vmd/lib/$install_name";
-cd src
-make install
-# launch VMD with something like the next line
-vglrun $HOME/software/vmd/bin/vmd
+$install_bin_dir="/home/<YourNetID>/software/vmd/bin";
+$install_library_dir="/home/<YourNetID>/software/vmd/lib/$install_name";
+$ cd src
+$ make install
+# launch VMD with the next command
+$ vglrun /home/<YourNetID>/software/vmd/bin/vmd
 # you coud add the above to your PATH in .bashrc
+```
+
+```
+$ vim ~/.bashrc  # or another text editor
+```
+
+Then add this line:
+
+```
+export PATH=$PATH:</path/to/vmd>
 ```
 
 If you run VMD on a machine other than tigressdata then you should omit vglrun:

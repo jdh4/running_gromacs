@@ -15,7 +15,7 @@ It is recommended that you install [TurboVNC](https://researchcomputing.princeto
 The following procedure can be used to install VMD on tigressdata:
 
 ```
-$ ssh <YourNetID>@tigressdata.princeton.edu
+$ ssh -X <YourNetID>@tigressdata.princeton.edu
 $ cd software  # or another directory
 $ wget https://www.ks.uiuc.edu/Research/vmd/vmd-1.9.4/files/alpha/vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz
 $ tar zxvf vmd-1.9.4a38.bin.LINUXAMD64-CUDA9-OptiX510-OSPRay170.opengl.tar.gz

@@ -12,7 +12,7 @@ It is recommended that you install [TurboVNC](https://researchcomputing.princeto
 
 ## Installing VMD on Tigressdata
 
-The following procedure to work for installing VMD on tigressdata:
+The following procedure can be used to install VMD on tigressdata:
 
 ```
 $ ssh <YourNetID>@tigressdata.princeton.edu

@@ -1,7 +1,7 @@
 # VMD on the HPC Clusters
 
 For intensive visualization work you can install [VMD](https://www.ks.uiuc.edu/Research/vmd/) in your `/home` directory on tigressdata. The `/scratch/gpfs` filesystems for each cluster and `/tigress` are
-accessible from tigressdata. For example, for Perseus use the path: `/perseus/scratch/gpfs/<YourNetID>`. This allows you to easily work with files on the different clusters.
+accessible from tigressdata. For example, for Perseus use the path: `/perseus/scratch/gpfs/<YourNetID>`.
 
 For just doing quick checks of system configurations you can also install it in your `/home` directory on one of the
 clusters (e.g., tiger).

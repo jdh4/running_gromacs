@@ -31,7 +31,7 @@ $ vglrun /home/<YourNetID>/software/vmd/bin/vmd
 # you coud add the above to your PATH in .bashrc
 ```
 
-Note the `vglrun` is not necessary but on Tigressdata it allows for OpenGL rendering on the GPU. On cluster head nodes it should be omitted.
+Note that `vglrun` is not necessary but on Tigressdata it allows for OpenGL rendering on the P100 GPU. On cluster head nodes it should be omitted from the command.
 
 ### Updating your PATH
 

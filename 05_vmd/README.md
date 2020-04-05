@@ -55,7 +55,7 @@ $ vmd <myfile.gro>
 
 ### More on TurboVNC
 
-To use VMD on the head node of a cluster, first ssh to `tigressdata.princeton.edu` using TurboVNC and then `ssh -X` to the desired cluster from tigressdata. It will take you a few minutes to install and configure TurboVNC but you will find that the performance is excellent.
+To use VMD on the head node of a cluster, first connect to `tigressdata.princeton.edu` using [TurboVNC](https://researchcomputing.princeton.edu/turbovnc) and then `ssh -X` to the desired cluster from tigressdata. It will take you a few minutes to install and configure TurboVNC but you will find that the performance is excellent.
 
 Within TurboVNC, use these keyboard sequences for copy and paste:
 

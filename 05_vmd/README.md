@@ -8,7 +8,7 @@ clusters (e.g., tiger).
 
 ## Working with Graphics
 
-It is recommended that you install [TurboVNC](https://researchcomputing.princeton.edu/turbovnc) to work with VMD. If you decide to rely on X11 forwarding then make sure you are aware of [this page](https://researchcomputing.princeton.edu/sshX).
+It is recommended that you install [TurboVNC](https://researchcomputing.princeton.edu/turbovnc) on your local machine (e.g., laptop) to work with VMD. If you decide to rely on X11 forwarding then make sure you are aware of [this page](https://researchcomputing.princeton.edu/sshX).
 
 ## Installing VMD on Tigressdata
 

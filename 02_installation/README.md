@@ -518,7 +518,7 @@ Gromacs can be built for GPU use on Adroit. Because it has four V100 GPUs, one c
 ```bash
 $ ssh <NetID>@adroit.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/adroit/adroit.sh>
+$ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/adroit/adroit.sh
 # make modifications to adroit.sh if needed
 $ bash adroit.sh | tee build.log
 ```

@@ -11,7 +11,7 @@ cd build_stage1
 #############################################################
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.1.144 rh/devtoolset/6
 
 OPTFLAGS="-Ofast -xCORE-AVX2 -axCORE-AVX512 -DNDEBUG"
 

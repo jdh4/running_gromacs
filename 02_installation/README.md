@@ -381,7 +381,7 @@ Della is good for single node jobs. You should not be running small jobs on Tige
 ```bash
 $ ssh <NetID>@della.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della/della.sh>
+$ wget https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/della/della.sh
 # make modifications to della.sh if needed
 $ bash della.sh | tee build.log
 ```

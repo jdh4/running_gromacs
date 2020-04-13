@@ -445,7 +445,7 @@ Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used fo
 ```bash
 $ ssh <NetID>@tigergpu.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/perseus/perseus.sh>
+$ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/perseus/perseus.sh
 # make modifications to perseus.sh if needed
 $ bash perseus.sh | tee build.log
 ```

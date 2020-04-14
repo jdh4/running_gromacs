@@ -379,10 +379,10 @@ $ ls -lL /lib64/*essl*
 Della is good for single node jobs. You should not be running small jobs on Tiger.
 
 ```bash
-$ ssh <NetID>@della.princeton.edu
+$ ssh <YourNetID>@della.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/della/della.sh
-# make modifications to della.sh if needed
+# make modifications to della.sh if needed (e.g., set the version in the 2nd line)
 $ bash della.sh | tee build.log
 ```
 

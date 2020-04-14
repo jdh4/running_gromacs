@@ -382,7 +382,7 @@ Della is good for single node jobs. You should not be running small jobs on Tige
 $ ssh <YourNetID>@della.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/della/della.sh
-# make modifications to della.sh if needed (e.g., set the version in the 2nd line)
+# make modifications to della.sh if needed (e.g., choose a different version)
 $ bash della.sh | tee build.log
 ```
 
@@ -392,9 +392,9 @@ For single-node jobs:
 #!/bin/bash
 #SBATCH --job-name=gmx           # create a short name for your job
 #SBATCH --nodes=1                # node count
-#SBATCH --ntasks=16              # total number of tasks across all nodes
+#SBATCH --ntasks=8               # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --mem=4G                 # memory per node (4G per cpu-core is default)
+#SBATCH --mem-per-cpu=4G         # memory per cpu-core (4G per cpu-core is default)
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --mail-type=all          # send email when job begins, ends and fails
 #SBATCH --mail-user=<YourNetID>@princeton.edu
@@ -412,10 +412,10 @@ For multi-node MPI jobs:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=gmx           # create a short name for your job
-#SBATCH --nodes=4                # node count
-#SBATCH --ntasks-per-node=16     # total number of tasks across all nodes
+#SBATCH --nodes=2                # node count
+#SBATCH --ntasks-per-node=32     # total number of tasks across all nodes
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
-#SBATCH --mem-per-cpu=1G         # memory per cpu-core (4G per cpu-core is default)
+#SBATCH --mem-per-cpu=4G         # memory per cpu-core (4G per cpu-core is default)
 #SBATCH --time=01:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --mail-type=all          # send email when job begins, ends and fails
 #SBATCH --mail-user=<YourNetID>@princeton.edu

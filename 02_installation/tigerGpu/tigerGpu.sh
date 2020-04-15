@@ -19,7 +19,7 @@ cd build_stage1
 #############################################################
 
 module purge
-module load intel/19.0/64/19.0.5.144
+module load intel/19.0/64/19.0.5.281
 module load cudatoolkit/10.2
 module load rh/devtoolset/7
 

@@ -1,7 +1,15 @@
 #!/bin/bash
-version=2019.4
+#############################################################
+# set the version
+#############################################################
+version=2019.6
+
+#############################################################
+# you probably don't need to change anything below this line
+#############################################################
+
 wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
-tar -zxvf gromacs-${version}.tar.gz
+tar zxvf gromacs-${version}.tar.gz
 cd gromacs-${version}
 mkdir build_stage1
 cd build_stage1
@@ -11,7 +19,7 @@ cd build_stage1
 #############################################################
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 
 OPTFLAGS="-Ofast -xCORE-AVX512 -mtune=skylake-avx512 -DNDEBUG"
 

@@ -7,10 +7,10 @@ The installation procedure depends on the cluster.
 The code can be built by following these commands:
 
 ```
-$ ssh <NetID>@tigergpu.princeton.edu
+$ ssh <YourNetID>@tigergpu.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/tigerGpu/tigerGpu.sh
-# make modifications to tigerGpu.sh if needed
+# make modifications to tigerGpu.sh if needed (e.g., choose a different version)
 $ bash tigerGpu.sh | tee build.log
 ```
 
@@ -31,7 +31,7 @@ For single-node jobs:
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 module load cudatoolkit/10.2
 
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
@@ -443,7 +443,7 @@ Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used fo
 $ ssh <NetID>@tigergpu.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/perseus/perseus.sh
-# make modifications to perseus.sh if needed
+# make modifications to perseus.sh if needed (e.g., choose a different version)
 $ bash perseus.sh | tee build.log
 ```
 
@@ -516,7 +516,7 @@ Gromacs can be built for GPU use on Adroit. Because it has four V100 GPUs, one c
 $ ssh <NetID>@adroit.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/adroit/adroit.sh
-# make modifications to adroit.sh if needed
+# make modifications to adroit.sh if needed (e.g., choose a different version)
 $ bash adroit.sh | tee build.log
 ```
 

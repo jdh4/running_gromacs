@@ -1,6 +1,6 @@
 #!/bin/bash
 version_fftw=3.3.8
-version_gmx=2019.4
+version_gmx=2019.6
 
 #############################################################
 # build a fast version of FFTW

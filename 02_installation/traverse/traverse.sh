@@ -7,7 +7,7 @@ version_gmx=2019.4
 #############################################################
 
 wget ftp://ftp.fftw.org/pub/fftw/fftw-${version_fftw}.tar.gz
-tar -zxvf fftw-${version_fftw}.tar.gz
+tar zxvf fftw-${version_fftw}.tar.gz
 cd fftw-${version_fftw}
 
 module purge
@@ -25,7 +25,7 @@ cd ..
 #############################################################
 
 wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version_gmx}.tar.gz
-tar -zxvf gromacs-${version_gmx}.tar.gz
+tar zxvf gromacs-${version_gmx}.tar.gz
 cd gromacs-${version_gmx}
 mkdir build_stage1
 cd build_stage1

@@ -343,7 +343,7 @@ snodes | grep -v 'cascade\|HOSTNAMES' | cut -c 1-13 | tr -s '\n' ',' | tr -d '[:
 Perseus is a lage cluster composed of Intel Broadwell CPUs. It is mainly used for astrophysics research. Run these commands to build GROMACS on perseus:
 
 ```bash
-$ ssh <NetID>@tigergpu.princeton.edu
+$ ssh <YourNetID>@perseus.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/perseus/perseus.sh
 # make modifications to perseus.sh if needed (e.g., choose a different version)

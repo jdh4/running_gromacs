@@ -122,7 +122,7 @@ For multi-node MPI jobs:
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 module load cudatoolkit/10.2
 module load intel-mpi/intel/2019.5/64
 

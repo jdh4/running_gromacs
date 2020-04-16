@@ -401,7 +401,7 @@ For single-node jobs:
 #SBATCH --exclude=della-r4c1n[1-16] # exclude ivy nodes
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
@@ -422,7 +422,7 @@ For multi-node MPI jobs:
 #SBATCH --constraint=cascade|skylake|broadwell|haswell # exclude ivy nodes
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 module load intel-mpi/intel/2018.3/64
 
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
@@ -445,14 +445,6 @@ $ cd </path/to/your/software/directory>  # e.g., cd ~/software
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/perseus/perseus.sh
 # make modifications to perseus.sh if needed (e.g., choose a different version)
 $ bash perseus.sh | tee build.log
-```
-
-Note that the latest Intel compiler cannot be used:
-
-```
-cmake fails with when using intel/19.0.5
--- Checking for 64-bit off_t
-*** Error in `/opt/intel/compilers_and_libraries_2019.5.281/linux/bin/intel64/icc': free(): invalid next size (fast): 0x00002addf0000970 ***
 ```
 
 ## TigerCPU
@@ -481,7 +473,7 @@ For single-node jobs:
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun_cpu -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
@@ -501,7 +493,7 @@ For multi-node runs:
 #SBATCH --mail-user=<YourNetID>@princeton.edu
 
 module purge
-module load intel/19.0/64/19.0.1.144
+module load intel/19.0/64/19.0.5.281
 module load intel-mpi/intel/2019.5/64
 
 gmx_cpu grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr

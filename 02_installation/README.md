@@ -73,10 +73,10 @@ Traverse is composed of 46 IBM POWER9 nodes with 4 NVIDIA V100 GPUs per node. Ea
 
 
 ```
-$ ssh <NetID>@traverse.princeton.edu
+$ ssh <YourNetID>@traverse.princeton.edu
 $ cd </path/to/your/software/directory>  # e.g., cd ~/software
-$ wget <https://github.com/PrincetonUniversity/running_gromacs/tree/master/02_install/traverse.sh>
-# make modifications to traverse.sh if needed
+$ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/traverse/traverse.sh
+# make modifications to traverse.sh if needed (e.g., choose a different version)
 $ bash traverse.sh | tee build.log
 ```
 

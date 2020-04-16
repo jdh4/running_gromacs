@@ -38,73 +38,6 @@ gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
-Slurm environment variables can be seen by adding `env | grep SLURM | sort` to your Slurm script:
-
-```
-SLURM_CLUSTER_NAME=tiger2
-SLURM_CPUS_ON_NODE=8
-SLURM_CPUS_PER_TASK=8
-SLURMD_NODENAME=tiger-i19g3
-SLURM_GTIDS=0
-SLURM_JOB_ACCOUNT=cses
-SLURM_JOB_CPUS_PER_NODE=8
-SLURM_JOB_GID=20121
-SLURM_JOB_GPUS=3
-SLURM_JOB_ID=4122593
-SLURM_JOBID=4122593
-SLURM_JOB_NAME=gmx
-SLURM_JOB_NODELIST=tiger-i19g3
-SLURM_JOB_NUM_NODES=1
-SLURM_JOB_PARTITION=gpu
-SLURM_JOB_QOS=gpu-test
-SLURM_JOB_UID=150340
-SLURM_JOB_USER=jdh4
-SLURM_LOCALID=0
-SLURM_MEM_PER_NODE=4096
-SLURM_NNODES=1
-SLURM_NODE_ALIASES=(null)
-SLURM_NODEID=0
-SLURM_NODELIST=tiger-i19g3
-SLURM_NPROCS=1
-SLURM_NTASKS=1
-SLURM_PROCID=0
-SLURM_SUBMIT_DIR=/home/jdh4/gromacs/gpu
-SLURM_SUBMIT_HOST=tigergpu.princeton.edu
-SLURM_TASK_PID=21026
-SLURM_TASKS_PER_NODE=1
-SLURM_TOPOLOGY_ADDR_PATTERN=node
-SLURM_TOPOLOGY_ADDR=tiger-i19g3
-SLURM_WORKING_CLUSTER=tiger2:tiger2-slurm:6820:8704:101
-```
-
-The shared library dependencies of `gmx`:
-
-```
-$ ldd gmx
-linux-vdso.so.1 =>  (0x00007ffc2cbfe000)
-libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002abff6918000)
-libmkl_sequential.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_sequential.so (0x00002abff7466000)
-libmkl_core.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_core.so (0x00002abff8a12000)
-libgromacs.so.4 => /home/jdh4/.local/bin/./../lib64/libgromacs.so.4 (0x00002abffcb9e000)
-libm.so.6 => /lib64/libm.so.6 (0x00002abffe3a8000)
-libstdc++.so.6 => /lib64/libstdc++.so.6 (0x00002abffe6aa000)
-libiomp5.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libiomp5.so (0x00002abffe9b2000)
-libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002abffed9a000)
-libpthread.so.0 => /lib64/libpthread.so.0 (0x00002abffefb0000)
-libc.so.6 => /lib64/libc.so.6 (0x00002abfff1cc000)
-libdl.so.2 => /lib64/libdl.so.2 (0x00002abfff59a000)
-librt.so.1 => /lib64/librt.so.1 (0x00002abfff79e000)
-libcufft.so.10 => /usr/local/cuda-10.2/lib64/libcufft.so.10 (0x00002abfff9a6000)
-libhwloc.so.5 => /lib64/libhwloc.so.5 (0x00002ac008e46000)
-libimf.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libimf.so (0x00002ac009083000)
-libsvml.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libsvml.so (0x00002ac009623000)
-libirng.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libirng.so (0x00002ac00afc6000)
-libintlc.so.5 => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libintlc.so.5 (0x00002ac00b338000)
-/lib64/ld-linux-x86-64.so.2 (0x00002abff66f4000)
-libnuma.so.1 => /lib64/libnuma.so.1 (0x00002ac00b5aa000)
-libltdl.so.7 => /lib64/libltdl.so.7 (0x00002ac00b7b5000)
-```
-
 Note that Gromacs only uses serial FFT routines so you will not benefit from a multithreaded or MPI FFT library.
 
 For multi-node MPI jobs:
@@ -131,36 +64,6 @@ srun mdrun_mpi -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 Our clusters are configured to use `srun`. Please do not use `mpirun`.
-
-The shared library dependencies of `mdrun_mpi` are:
-
-```
-$ ldd mdrun_mpi
-linux-vdso.so.1 =>  (0x00007fff8e143000)
-libmkl_intel_lp64.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00002adc6a709000)
-libmkl_sequential.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_sequential.so (0x00002adc6b257000)
-libmkl_core.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64/libmkl_core.so (0x00002adc6c803000)
-libmpifort.so.12 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/lib/libmpifort.so.12 (0x00002adc7098f000)
-libmpi.so.12 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/lib/release/libmpi.so.12 (0x00002adc70d4d000)
-libdl.so.2 => /lib64/libdl.so.2 (0x00002adc71d52000)
-librt.so.1 => /lib64/librt.so.1 (0x00002adc71f56000)
-libpthread.so.0 => /lib64/libpthread.so.0 (0x00002adc7215e000)
-libcufft.so.10 => /usr/local/cuda-10.2/lib64/libcufft.so.10 (0x00002adc7237a000)
-libhwloc.so.5 => /lib64/libhwloc.so.5 (0x00002adc7b81a000)
-libm.so.6 => /lib64/libm.so.6 (0x00002adc7ba57000)
-libstdc++.so.6 => /lib64/libstdc++.so.6 (0x00002adc7bd59000)
-libiomp5.so => /opt/intel/compilers_and_libraries_2019.1.144/linux/compiler/lib/intel64/libiomp5.so (0x00002adc7c061000)
-libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00002adc7c449000)
-libc.so.6 => /lib64/libc.so.6 (0x00002adc7c65f000)
-/lib64/ld-linux-x86-64.so.2 (0x00002adc6a4e5000)
-libfabric.so.1 => /opt/intel/compilers_and_libraries_2019.5.281/linux/mpi/intel64/libfabric/lib/libfabric.so.1 (0x00002adc7ca2d000)
-libnuma.so.1 => /lib64/libnuma.so.1 (0x00002adc7cc65000)
-libltdl.so.7 => /lib64/libltdl.so.7 (0x00002adc7ce70000)
-```
-
-Where to store your files:
-
-![tigress](https://tigress-web.princeton.edu/~jdh4/hpc_princeton_filesystems.png)
 
 ## Traverse
 

@@ -19,7 +19,7 @@ cd build_stage1
 #############################################################
 
 module purge
-module load intel/19.0/64/19.0.5.281
+module load intel/19.0/64/19.0.5.281 rh/devtoolset/6
 
 OPTFLAGS="-Ofast -xCORE-AVX512 -mtune=skylake-avx512 -DNDEBUG"
 

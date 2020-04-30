@@ -172,7 +172,7 @@ BCH=../gpu_bench/rnase_cubic
 gmx grompp -f $BCH/pme_verlet.mdp -c $BCH/conf.gro -p $BCH/topol.top -o bench.tpr
 date
 numactl -s
-taskset -p $$
+taskset -c -p $$
 date
 
 #--gres-flags=enforce-binding

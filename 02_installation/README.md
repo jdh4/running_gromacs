@@ -437,7 +437,7 @@ gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
-One should find the optimal values of `ntasks` and `cpus-per-task`. For a job that use a single GPU, the product of those two parameters should not exceed 10.
+One should find the optimal values of `ntasks` and `cpus-per-task`. For a job that uses a single GPU, the product of those two parameters should not exceed 10.
 
 ## Adroit (CPU)
 

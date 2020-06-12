@@ -431,7 +431,7 @@ Below is a sample Slurm script for single-node jobs:
 
 module purge
 module load intel/19.0/64/19.0.1.144
-module load cudatoolkit/10.1
+module load cudatoolkit/10.2
 
 gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
 gmx mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr

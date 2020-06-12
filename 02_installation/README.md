@@ -378,8 +378,8 @@ For single-node jobs:
 module purge
 module load intel/19.0/64/19.0.5.281
 
-gmx grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
-gmx mdrun_cpu -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
+gmx_cpu grompp -f pme_verlet.mdp -c conf.gro -p topol.top -o bench.tpr
+gmx_cpu mdrun -ntmpi $SLURM_NTASKS -ntomp $SLURM_CPUS_PER_TASK -s bench.tpr
 ```
 
 For multi-node runs:

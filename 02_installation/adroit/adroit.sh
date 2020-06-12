@@ -1,5 +1,5 @@
 #!/bin/bash
-version=2019.4
+version=2019.6
 wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
 tar -zxvf gromacs-${version}.tar.gz
 cd gromacs-${version}

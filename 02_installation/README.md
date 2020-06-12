@@ -357,6 +357,7 @@ If you have an account on Tiger then consider building only a GPU version:
 ```
 $ ssh <NetID>@tigercpu.princeton.edu
 $ cd </path/to/software/directory>  # e.g., cd ~/software
+$ mkdir cpu_version && cd cpu_version
 $ wget https://raw.githubusercontent.com/jdh4/running_gromacs/master/02_installation/tigerCpu/tigerCpu.sh
 # make modifications to tigercpu.sh if needed
 $ bash tigerCpu.sh | tee build.log

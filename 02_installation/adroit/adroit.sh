@@ -12,7 +12,7 @@ cd build_stage1
 
 module purge
 module load intel/19.0/64/19.0.1.144
-module load cudatoolkit/10.1
+module load cudatoolkit/10.2
 module load rh/devtoolset/7
 
 OPTFLAGS="-Ofast -xCORE-AVX512 -mtune=skylake-avx512 -DNDEBUG"

@@ -61,7 +61,7 @@ cd ..
 mkdir build_stage2
 cd build_stage2
 
-module load openmpi/devtoolset-8/4.0.1/64
+module load openmpi/devtoolset-8/4.0.3rc1/64
 
 cmake3 .. -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_C_COMPILER=gcc -DCMAKE_C_FLAGS_RELEASE="$OPTFLAGS" \

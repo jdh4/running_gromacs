@@ -8,8 +8,7 @@ version=2016.3
 # you probably don't need to change anything below this line
 #############################################################
 
-#wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
-rm -rf gromacs-${version}
+wget ftp://ftp.gromacs.org/pub/gromacs/gromacs-${version}.tar.gz
 tar zxf gromacs-${version}.tar.gz
 cd gromacs-${version}
 mkdir build_stage1

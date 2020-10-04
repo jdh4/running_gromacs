@@ -192,6 +192,13 @@ hostname
 nvidia-smi --query-gpu=index,pci.bus_id,name --format=csv,noheader
 ```
 
+```
+The ulimit -s unlimited line makes the stack size the maximum possible. This is important if your code dynamically allocates a large amount of memory. By purging the modules you can be sure nothing has been unintentionally loaded. The module list statement is useful because it writes out the explicit module versions. This important if you later need to know exactly which modules you used. Lastly, all the SLURM environment variables are outputted. One can examine the values to see if they are as expected.
+
+The default values for SLURM for a cluster are found here: /etc/slurm/slurm.conf
+
+To see the run time limits for a cluster, look at: /etc/slurm/job_submit.lua
+```
 
 Note that `rh/devtoolset/8` cannot be used to compile Gromacs on Traverse. The IBM xlc/C compilers are not supported by Gromacs 2019.
 

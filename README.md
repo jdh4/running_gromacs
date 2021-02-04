@@ -1,3 +1,3 @@
-# Running Gromacs
+# This repo has moved here
 
-This guide presents the best practices for Gromacs on the Princeton HPC clusters.
+[https://github.com/PrincetonUniversity/running_gromacs](https://github.com/PrincetonUniversity/running_gromacs)
